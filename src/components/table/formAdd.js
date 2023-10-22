@@ -55,7 +55,7 @@ function FormAdd() {
             <form className=" flex justify-around text-black smt:flex-col">
                 <div className="flex flex-col space-y-2">
                     <label className=" font-bold text-base" htmlFor="imgOne">
-                        Image
+                        Image - 1 
                     </label>
                     <input
                         id="imgOne"
@@ -64,7 +64,7 @@ function FormAdd() {
                         className="border border-solid border-gray-500 rounded-sm w-[250px] px-2 py-1 focus-visible:border-blue-500"
                     />
                     <label className=" font-bold text-base" htmlFor="imgTwo">
-                        Image
+                        Image - 2
                     </label>
                     <input
                         id="imgTwo"
@@ -73,7 +73,7 @@ function FormAdd() {
                         className="border border-solid border-gray-500 rounded-sm w-[250px] px-2 py-1"
                     />
                     <label className=" font-bold text-base" htmlFor="imgThree">
-                        Image
+                        Image - 3
                     </label>
                     <input
                         id="imgThree"
@@ -82,7 +82,7 @@ function FormAdd() {
                         className="border border-solid border-gray-500 rounded-sm w-[250px] px-2 py-1"
                     />
                     <label className=" font-bold text-base" htmlFor="imgFour">
-                        Image
+                        Image - 4
                     </label>
                     <input
                         id="imgFour"
@@ -116,7 +116,9 @@ function FormAdd() {
                 <div className="flex flex-col">
                     <div className="flex text-base  font-bold space-x-7">
                         <div>
-                            <label> Size</label>
+                            <label style={{
+                                display: 'block'
+                            }}> Size</label>
                             <input
                                 type="checkbox"
                                 id="size2"
@@ -164,7 +166,11 @@ function FormAdd() {
                         </div>
 
                         <div>
-                            <label>Shoes</label>
+                            <label
+                                style={{
+                                    display: 'block'
+                                }}
+                            >Shoes</label>
                             <input
                                 type="checkbox"
                                 id="us9"
@@ -213,10 +219,10 @@ function FormAdd() {
                     <select
                         name="type"
                         id="type"
-                        className="w-[150px] p-2"
+                        className="w-[180px] p-2"
                         onChange={(e) => getValue(e.target)}
                     >
-                        <option>--Choose type--</option>
+                        <option>Chọn loại mặt hàng</option>
                         <option value="shirt">shirt</option>
                         <option value="pants">pants</option>
                         <option value="dress">dress</option>
@@ -231,7 +237,7 @@ function FormAdd() {
                         className="w-[150px] p-2"
                         onChange={(e) => getValue(e.target)}
                     >
-                        <option>--Choose Object--</option>
+                        <option>Dành cho</option>
                         <option value="man">man</option>
                         <option value="woman">woman</option>
                         <option value="kids">kids</option>

@@ -68,7 +68,7 @@ function FormUpdate({ id, product }) {
             <form className=" flex justify-around text-black smt:flex-col">
                 <div className="flex flex-col space-y-2">
                     <label className=" font-bold text-base" htmlFor="imgOne">
-                        Image
+                        Image - 1
                     </label>
                     <input
                         id="imgOne"
@@ -78,7 +78,7 @@ function FormUpdate({ id, product }) {
                         className="border border-solid border-slate-950 rounded-sm w-[250px] px-2 py-1"
                     />
                     <label className=" font-bold text-base" htmlFor="imgTwo">
-                        Image
+                        Image - 2
                     </label>
                     <input
                         id="imgTwo"
@@ -88,7 +88,7 @@ function FormUpdate({ id, product }) {
                         className="border border-solid border-slate-950 rounded-sm w-[250px] px-2 py-1"
                     />
                     <label className=" font-bold text-base" htmlFor="imgThree">
-                        Image
+                        Image - 3 
                     </label>
                     <input
                         id="imgThree"
@@ -98,7 +98,7 @@ function FormUpdate({ id, product }) {
                         className="border border-solid border-slate-950 rounded-sm w-[250px] px-2 py-1"
                     />
                     <label className=" font-bold text-base" htmlFor="imgFour">
-                        Image
+                        Image - 4 
                     </label>
                     <input
                         id="imgFour"
@@ -132,7 +132,9 @@ function FormUpdate({ id, product }) {
                 </div>
                 <div className="flex flex-col">
                     <div className="flex text-base font-bold flex-col">
-                        <label> Size</label>
+                        <label style={{
+                            display: 'block'
+                        }}> Size</label>
                         {sizeDefault.map((size) => (
                             <div className="space-x-3" key={size}>
                                 <input
@@ -158,7 +160,7 @@ function FormUpdate({ id, product }) {
                         value={valueForm.type}
                         onChange={(e) => getValue(e.target)}
                     >
-                        <option>--Choose type--</option>
+                        <option>Kiểu sản phẩm</option>
                         <option value="shirt">shirt</option>
                         <option value="pants">pants</option>
                         <option value="dress">dress</option>
@@ -174,7 +176,7 @@ function FormUpdate({ id, product }) {
                         value={valueForm.Ob}
                         onChange={(e) => getValue(e.target)}
                     >
-                        <option>--Choose Object--</option>
+                        <option>Dành cho</option>
                         <option value="man">man</option>
                         <option value="woman">woman</option>
                         <option value="kids">kids</option>

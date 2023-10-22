@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import Pagination from "../page/Pagination";
 import { DownloadTableExcel } from "react-export-table-to-excel";
-import { getAllOrder } from "@/service/order";
+import { getAllOrder, isDelivered } from "@/service/order";
+import { handler } from "tailwindcss-animate";
 
 function TableOrder() {
     const tableRef = useRef(null);
@@ -18,6 +19,12 @@ function TableOrder() {
         }
         getData();
     }, []);
+
+    const handlerDeliver = async (id, data) => {
+        window.location.reload()
+        data.isDelivered = true
+        const check = await isDelivered(id,data)
+    }
 
     return (
         <div className="relative overflow-x-auto shadow-md smt:rounded-lg">
@@ -125,6 +132,16 @@ function TableOrder() {
                                     className="text-center  px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                 >
                                     {item.isDelivered ? "đã ship" : "chưa ship"}
+                                </th>
+                                <th>
+                                    {item.isDelivered 
+                                    ? '' 
+                                    : <Button
+                                        onClick={ () => handlerDeliver(item._id, item)}
+                                    >
+                                        Đã giao
+                                    </Button>
+                                    }
                                 </th>
                             </tr>
                         );
