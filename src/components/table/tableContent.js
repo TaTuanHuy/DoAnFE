@@ -27,6 +27,14 @@ function TbContent() {
                         Tất cả đơn order
                     </Link>
                 </div>
+                <div>
+                    <Link
+                        href={"/management?table=user"}
+                        className={search === "user" && "font-bold text-[#6d3f0a]"}
+                    >
+                        Tất cả user
+                    </Link>
+                </div>
             </div>
             <div className=" border-l-[1px] border-slate-900 smt:border-b-[1px] smt:mt-5"></div>
             <Content search={search} />

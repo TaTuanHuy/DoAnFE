@@ -23,8 +23,8 @@ export const getAllOrder = async () => {
     return data;
 };
 
-export const isDelivered  = async(id, data) => {
-    const test = await fetch(`http://localhost:4000/order/edit-order/${id}`, {
+export const isDelivered = async (id, data) => {
+    const test = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/order/edit-order/${id}`, {
         method: "PATCH",
         body: JSON.stringify(data),
         headers: {
@@ -32,5 +32,45 @@ export const isDelivered  = async(id, data) => {
         },
     }).then((res) => res.json())
 
-    return test 
+    return test
 }
+
+
+export const getAllUser = async (token) => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/users/all-user`, {
+        method: "GET",
+        headers: {
+            "token": token
+        }
+    }).then((res) => res.json())
+    return response
+}
+
+export const changeAmdin = async (token, id, data) => {
+
+    data.isAdmin = true
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/users/update/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-type": "application/json",
+            "token": token
+        }
+    }).then((res) => res.json())
+    return response
+}
+
+export const deleteUser = async (token, id) => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/users/move/trash/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-type": "application/json",
+            "token": token
+        }
+    }).then((res) => res.json())
+    return response
+}
+
+
+
+
