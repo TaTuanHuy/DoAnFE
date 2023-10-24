@@ -3,6 +3,7 @@ import NewAndUpdateProduct from "./formManagement";
 import TableProduct from "./tableProduct";
 import { Button } from "../ui/button";
 import TableOrder from "./tableOrder";
+import TableUser from "./tableUser";
 
 function Content({ search }) {
     return (
@@ -22,6 +23,12 @@ function Content({ search }) {
                 <>
                     <h1 className="font-bold text-xl text-center">Tất cả đơn đặt hàng</h1>
                     <TableOrder />
+                </>
+            )}
+            {search === 'user' && (
+                <>
+                    <h1 className="font-bold text-xl text-center">tất cả người dùng</h1>
+                    <TableUser />
                 </>
             )}
         </div>
