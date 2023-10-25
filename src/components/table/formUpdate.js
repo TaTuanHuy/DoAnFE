@@ -28,6 +28,7 @@ function FormUpdate({ id, product }) {
         type: product.type,
         size: sizeCheck,
         Ob: product.Ob,
+        quantity: product.quantity,
         image: [img1, img2, img3, img4],
     });
 
@@ -88,7 +89,7 @@ function FormUpdate({ id, product }) {
                         className="border border-solid border-slate-950 rounded-sm w-[250px] px-2 py-1"
                     />
                     <label className=" font-bold text-base" htmlFor="imgThree">
-                        Image - 3 
+                        Image - 3
                     </label>
                     <input
                         id="imgThree"
@@ -98,7 +99,7 @@ function FormUpdate({ id, product }) {
                         className="border border-solid border-slate-950 rounded-sm w-[250px] px-2 py-1"
                     />
                     <label className=" font-bold text-base" htmlFor="imgFour">
-                        Image - 4 
+                        Image - 4
                     </label>
                     <input
                         id="imgFour"
@@ -126,6 +127,16 @@ function FormUpdate({ id, product }) {
                         id="price"
                         name="price"
                         value={valueForm.price}
+                        onChange={(e) => getValue(e.target)}
+                        className="border border-solid border-slate-950 rounded-sm w-[250px] px-2 py-1"
+                    />
+                    <label className=" font-bold text-base" htmlFor="quantity">
+                        Quantity
+                    </label>
+                    <input
+                        id="quantity"
+                        name="quantity"
+                        value={valueForm.quantity}
                         onChange={(e) => getValue(e.target)}
                         className="border border-solid border-slate-950 rounded-sm w-[250px] px-2 py-1"
                     />

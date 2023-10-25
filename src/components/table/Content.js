@@ -11,7 +11,7 @@ function Content({ search }) {
             {search === "product" && (
                 <>
                     <h1 className="font-bold text-xl text-center">Tất cả sản phẩm</h1>
-                    <NewAndUpdateProduct title={"Create some new ohhyaaa"} create>
+                    <NewAndUpdateProduct title={"Create some new product"} create>
                         <Button variant="none">
                             <PlusSquare size={100} />
                         </Button>

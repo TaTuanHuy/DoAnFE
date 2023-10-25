@@ -18,8 +18,7 @@ function ListProduct({ param }) {
 
     useEffect(() => {
         fetch(
-            `${process.env.NEXT_PUBLIC_API_APP_URL}/product/all/product/${param}?page=${
-                pageUi - 1
+            `${process.env.NEXT_PUBLIC_API_APP_URL}/product/all/product/${param}?page=${pageUi - 1
             }${sort}${type}`
         )
             .then((res) => res.json())
@@ -120,30 +119,65 @@ function ListProduct({ param }) {
             <div className="grid gird-row-3 grid-cols-3 gap-4 smt:px-2 smt:gap-2">
                 {Products?.map((product) => {
                     return (
-                        <Link
-                            href={`/${product.Ob}/${product._id}`}
-                            key={product._id}
-                            className=" object-cover"
-                        >
-                            <div className=" wrapper ">
-                                <img
-                                    src={product.image[0].img}
-                                    alt="..."
-                                    className="w-[319px] h-[479px] rounded-xl box-sd img smt:w-[150px] smt:h-[200px]"
-                                />
-                                <div className="text-center ">
-                                    <h2 className="m-3 text-gray-500 cursor-pointer text-base hover:text-black smt:text-xs">
-                                        {product.name}
-                                    </h2>
-                                    <p className="mt-4 font-bold smt:text-xs">{product.price}</p>
-                                </div>
-                                <div className="middle">
-                                    <Button className=" bg-[#6d3f0a]  text-white hover:bg-[#9b7e5e]">
-                                        Xem Thêm
-                                    </Button>
-                                </div>
-                            </div>
-                        </Link>
+                        <>
+                            {product.quantity !== 0 ?
+                                (
+                                    <Link
+                                        href={`/${product.Ob}/${product._id}`}
+                                        key={product._id}
+                                        className=" object-cover"
+                                    >
+                                        <div className=" wrapper ">
+                                            <img
+                                                src={product.image[0].img}
+                                                alt="..."
+                                                className="w-[319px] h-[479px] rounded-xl box-sd img smt:w-[150px] smt:h-[200px]"
+                                            />
+                                            <div className="text-center ">
+                                                <h2 className="m-3 text-gray-500 cursor-pointer text-base hover:text-black smt:text-xs">
+                                                    {product.name}
+                                                </h2>
+                                                <p className="mt-4 font-bold smt:text-xs">{product.price}</p>
+                                            </div>
+                                            <div className="middle">
+                                                <Button className=" bg-[#6d3f0a]  text-white hover:bg-[#9b7e5e]">
+                                                    Xem Thêm
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                )
+                                : (
+                                    <div
+                                        key={product._id}
+                                        className=" object-cover"
+                                    >
+                                        <div className=" wrapper ">
+                                            <img
+                                                src={product.image[0].img}
+                                                alt="..."
+                                                className="w-[319px] h-[479px] rounded-xl box-sd img smt:w-[150px] smt:h-[200px]"
+                                            />
+                                            <div className="text-center ">
+                                                <h2 className="m-3 text-gray-500 cursor-pointer text-base hover:text-black smt:text-xs">
+                                                    {product.name}
+                                                </h2>
+                                                <p className="mt-4 font-bold smt:text-xs">{product.price}</p>
+                                            </div>
+                                            <div className="middle">
+                                                <Button
+                                                    style={{
+                                                        padding: '5px 12px'
+                                                    }}
+                                                    className=" bg-[#c71616b8]  text-white hover:bg-[#c71616]">
+                                                    Sản phẩm đã hết hàng
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        </>
                     );
                 })}
             </div>

@@ -34,9 +34,14 @@ export const orderSlice = createSlice({
             }
         },
         increasing: (state, action) => {
-            const { productId } = action.payload;
+            const { productId, quantity } = action.payload;
             const itemOder = state?.orderItems?.find((item) => item?.product === productId);
             itemOder.amount++;
+            if (itemOder.amount > quantity) {
+                alert('Bạn đã nhập quá số lượng cho phép! vui lòng thử lại!')
+                itemOder.amount = 1
+            }
+
         },
         decrease: (state, action) => {
             const { productId } = action.payload;
@@ -45,6 +50,7 @@ export const orderSlice = createSlice({
             if (itemOder.amount <= 0) {
                 itemOder.amount = 1;
             }
+
         },
         removeOrder: (state, action) => {
             const { productId } = action.payload;

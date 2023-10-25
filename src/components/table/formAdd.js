@@ -55,7 +55,7 @@ function FormAdd() {
             <form className=" flex justify-around text-black smt:flex-col">
                 <div className="flex flex-col space-y-2">
                     <label className=" font-bold text-base" htmlFor="imgOne">
-                        Image - 1 
+                        Image - 1
                     </label>
                     <input
                         id="imgOne"
@@ -109,6 +109,17 @@ function FormAdd() {
                         id="price"
                         name="price"
                         value={valueForm.price}
+                        onChange={(e) => getValue(e.target)}
+                        className="border border-solid border-gray-500 rounded-sm w-[250px] px-2 py-1"
+                    />
+
+                    <label className=" font-bold text-base" htmlFor="quantity">
+                        Quantity
+                    </label>
+                    <input
+                        id="quantity"
+                        name="quantity"
+                        value={valueForm.quantity}
                         onChange={(e) => getValue(e.target)}
                         className="border border-solid border-gray-500 rounded-sm w-[250px] px-2 py-1"
                     />

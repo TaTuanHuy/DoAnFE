@@ -14,6 +14,12 @@ function DetailItem({ product }) {
     const [typeBtn, setTypeBtn] = useState(true);
 
     const [count, setCount] = useState(1);
+
+    if (count > product.quantity) {
+        alert('Bạn đã nhập quá số lượng cho phép! vui lòng thử lại!')
+        setCount(1)
+    }
+
     const router = useRouter();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
@@ -36,6 +42,7 @@ function DetailItem({ product }) {
                             image: product.image[0].img,
                             price: numberPrice,
                             product: product._id,
+                            quantity: product.quantity
                         },
                     })
                 );
@@ -59,11 +66,13 @@ function DetailItem({ product }) {
                     image: product.image[0].img,
                     price: numberPrice,
                     product: product._id,
+                    quantity: product.quantity
                 })
             );
             router.push(`/checkouts/${user._id}?buy=now`);
         }
     }
+
     return (
         <div className="relative flex pt-16 items-center smt:flex-col mdt:flex-col  xlt:flex-col">
             <Product product={product} />
@@ -72,6 +81,7 @@ function DetailItem({ product }) {
                     <h1 className="text-2xl font-bold mb-6 smt:mt-4">{product?.name}</h1>
                     <span className="text-base ">Thương Hiệu : DCB24th</span>
                     <h2 className="text-3xl my-10 font-bold">{product?.price}</h2>
+                    <span className="text-base ">Số lượng còn lại : {product.quantity}</span>
                 </div>
                 <ButtonSize product={product} typeBtn={typeBtn} setTypeBtn={setTypeBtn} />
                 {typeBtn === false && <span className="text-red-500">Hãy chọn size cho bạn</span>}

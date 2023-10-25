@@ -123,6 +123,9 @@ function TableProduct() {
                         <th scope="col" className="px-6 py-3">
                             Sale
                         </th>
+                        <th scope="col" className="px-6 py-3">
+                            Quantity
+                        </th>
                         <th scope="col" colSpan={2} className="px-6 py-3 ">
                             Action
                         </th>
@@ -169,6 +172,7 @@ function TableProduct() {
                             </td>
                             <td className="px-6 py-4">{dataItem.Ob}</td>
                             <td className="px-6 py-4">{dataItem.sale}</td>
+                            <td className="px-6 py-4">{dataItem.quantity !== 0 ? dataItem.quantity : 'Hết hàng!'}</td>
                             <td className="py-4 ">
                                 <NewAndUpdateProduct
                                     title={"edit"}

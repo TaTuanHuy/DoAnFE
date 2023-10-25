@@ -18,16 +18,17 @@ function Cart() {
         }
         return init;
     }, [order]);
-    const changeNumber = (type, id) => {
+    const changeNumber = (type, id, quantity) => {
         switch (type) {
             case "decrease":
                 return dispatch(decrease({ productId: id }));
             case "increasing":
-                return dispatch(increasing({ productId: id }));
+                return dispatch(increasing({ productId: id, quantity }));
             default:
                 break;
         }
     };
+
     return (
         <div className="md:container min-h-[1000px] smt:px-5 ">
             <h1 className="py-6 text-[14px] uppercase">
@@ -47,7 +48,6 @@ function Cart() {
                             <th scope="col" className="px-6 py-3 ">
                                 Price
                             </th>
-
                             <th scope="col" className="px-6 py-3 ">
                                 Number
                             </th>
@@ -82,11 +82,11 @@ function Cart() {
                                 <td className="px-6 py-4">
                                     <p className="flex space-x-3">
                                         <Minus
-                                            onClick={() => changeNumber("decrease", item.product)}
+                                            onClick={() => changeNumber("decrease", item.product, item.quantity)}
                                         />{" "}
                                         <span className="text-blue-700">{item.amount}</span>{" "}
                                         <Plus
-                                            onClick={() => changeNumber("increasing", item.product)}
+                                            onClick={() => changeNumber("increasing", item.product, item.quantity)}
                                         />
                                     </p>
                                 </td>
