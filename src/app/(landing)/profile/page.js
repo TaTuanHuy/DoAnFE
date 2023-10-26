@@ -18,6 +18,7 @@ function Profile() {
         setEmail(user?.email);
         setPhone(user?.phoneNumber);
     }, [user]);
+
     function hanldleSubmit() {
         fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/users/update/${user._id}`, {
             method: "PATCH",

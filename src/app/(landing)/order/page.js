@@ -1,45 +1,51 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { Button } from "../ui/button";
-import Pagination from "../page/Pagination";
-import { DownloadTableExcel } from "react-export-table-to-excel";
-import { getAllOrder, isDelivered } from "@/service/order";
-import { handler } from "tailwindcss-animate";
+import { Button } from "@/components/ui/button";
+import { Heading1 } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState, useRef } from "react";
+import { useSelector } from "react-redux";
+import { getOrderByUserID, deleteOrder } from "../../../service/order"
 
-function TableOrder() {
+function Order() {
     const tableRef = useRef(null);
-    const [data, setData] = useState();
+    const user = useSelector((state) => state.auth.user);
 
-    const [pageUi, setPageUi] = useState(1);
+    const [order, setOrder] = useState([])
 
     useEffect(() => {
         async function getData() {
-            const datas = await getAllOrder();
-            return setData(datas);
+            const token = localStorage.getItem('access_token')
+            const response = await getOrderByUserID(user._id, token);
+            return setOrder(response);
         }
         getData();
-    }, []);
+    }, [user]);
 
-    const handlerDeliver = async (id, data) => {
+    const userDeleteOrder = async (id) => {
         window.location.reload()
-        data.isDelivered = true
-        const check = await isDelivered(id, data)
+        const token = localStorage.getItem('access_token')
+        const response = await deleteOrder(id, token)
+        if (response.message === 'successfull') {
+            alert('Thay đổi thành công !')
+        } else {
+            alert('Thay đổi không thành công! Vui lòng thử lại')
+        }
     }
 
     return (
-        <div className="relative overflow-x-auto shadow-md smt:rounded-lg">
-            <DownloadTableExcel
-                filename="users table"
-                sheet="users"
-                currentTableRef={tableRef.current}
-            >
-                <Button variant="none" className="bg-blue-500 text-white ">
-                    Export excel
-                </Button>
-            </DownloadTableExcel>
+        <div className="relative overflow-x-auto shadow-md smt:rounded-lg mt-4"
+            style={{
+                minHeight: '500px',
+                maxWidth: '1300px',
+                margin: 'auto'
+            }}
+        >
             <table
                 ref={tableRef}
                 className="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-auto "
+                style={{
+                    marginTop: '30px'
+                }}
             >
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -67,13 +73,17 @@ function TableOrder() {
                         <th scope="col" className="px-6 py-3 text-center">
                             isDelivered
                         </th>
-                        <th scope="col" colSpan={2} className="px-6 py-3 ">
+                        <th
+                            style={{
+                                minWidth: '220px'
+                            }}
+                            scope="col" colSpan={3} className="px-6 py-3 ">
                             Action
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.map((item, i) => {
+                    {order?.map((item, i) => {
                         return (
                             <tr key={item._id}>
                                 <th
@@ -131,7 +141,7 @@ function TableOrder() {
                                     scope="row"
                                     className="text-center  px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                 >
-                                    {item.isDelivered ? "đã ship" : "chưa ship"}
+                                    {item.isDelivered ? "đã giao hàng" : "chưa giao hàng"}
                                 </th>
                                 <th>
                                     {item.isDelivered
@@ -139,7 +149,17 @@ function TableOrder() {
                                         : <Button
                                             onClick={() => handlerDeliver(item._id, item)}
                                         >
-                                            Đã giao
+                                            Chỉnh sửa thông tin
+                                        </Button>
+                                    }
+                                </th>
+                                <th>
+                                    {item.isDelivered
+                                        ? ''
+                                        : <Button
+                                            onClick={() => userDeleteOrder(item._id)}
+                                        >
+                                            Hủy đặt hàng
                                         </Button>
                                     }
                                 </th>
@@ -148,15 +168,8 @@ function TableOrder() {
                     })}
                 </tbody>
             </table>
-            {/* <Pagination
-                setPageUi={setPageUi}
-                pageUi={pageUi}
-                page={page}
-                totalPage={totalPage}
-                countProducts={countProducts}
-            /> */}
         </div>
-    );
+    )
 }
 
-export default TableOrder;
+export default Order

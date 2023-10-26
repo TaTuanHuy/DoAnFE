@@ -8,6 +8,7 @@ import {
     LogOut,
     FolderCog,
     Menu,
+    ShoppingBasket
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -76,6 +77,13 @@ function Header() {
                                         variant="none"
                                         className="py-[15px] px-[20px] flex space-x-2"
                                     >
+                                        <ShoppingBasket />
+                                        <Link href={"/order"}>Đơn hàng của bạn</Link>
+                                    </Button>
+                                    <Button
+                                        variant="none"
+                                        className="py-[15px] px-[20px] flex space-x-2"
+                                    >
                                         <FolderCog />
                                         <Link href={"/management?table=product"}>
                                             Quản lý sản phẩm
@@ -99,6 +107,13 @@ function Header() {
                                     >
                                         <User />
                                         <Link href={"/profile"}>Thông tin tài khoản</Link>
+                                    </Button>
+                                    <Button
+                                        variant="none"
+                                        className="py-[15px] px-[20px] flex space-x-2"
+                                    >
+                                        <User />
+                                        <Link href={"/order"}>Đơn hàng của bạn</Link>
                                     </Button>
                                     <Button
                                         variant="none"
