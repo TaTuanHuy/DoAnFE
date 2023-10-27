@@ -119,7 +119,7 @@ function ListProduct({ param }) {
             <div className="grid gird-row-3 grid-cols-3 gap-4 smt:px-2 smt:gap-2">
                 {Products?.map((product) => {
                     return (
-                        <>
+                        <div key={product._id}>
                             {product.quantity !== 0 ?
                                 (
                                     <Link
@@ -177,7 +177,7 @@ function ListProduct({ param }) {
                                     </div>
                                 )
                             }
-                        </>
+                        </div>
                     );
                 })}
             </div>

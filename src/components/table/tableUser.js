@@ -46,7 +46,7 @@ function TableUser() {
     }
 
     return (
-        <div className="relative overflow-x-auto shadow-md smt:rounded-lg">
+        <>
             <DownloadTableExcel
                 filename="users table"
                 sheet="users"
@@ -56,89 +56,95 @@ function TableUser() {
                     Export excel
                 </Button>
             </DownloadTableExcel>
-            <table
-                ref={tableRef}
-                className="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-auto "
+            <div className="relative overflow-x-auto shadow-md smt:rounded-lg"
+                style={{
+                    maxHeight: '650px'
+                }}
             >
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" className="px-6 py-3    text-center">
-                            UserName
-                        </th>
-                        <th scope="col" className="px-6 py-3   text-center ">
-                            Email
-                        </th>
-                        <th scope="col" className="px-6 py-3 text-center">
-                            Phone
-                        </th>
-                        <th scope="col" className="px-6 py-3   text-center">
-                            Place
-                        </th>
-                        <th scope="col" className="px-6 py-3  text-center">
-                            Change Admin
-                        </th>
-                        <th scope="col" className="px-6 py-3  text-center">
-                            Delete Account
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data?.map((item, i) => {
-                        return (
-                            <tr key={i}>
-                                <th
-                                    scope="row"
-                                    className="px-7 py-5 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                >
-                                    {item.name}
-                                </th>
-                                <th
-                                    scope="row"
-                                    className="px-7 py-5 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                >
-                                    {item.email}
-                                </th>
-                                <th
-                                    scope="row"
-                                    className="px-7 py-5 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                >
-                                    {item.phoneNumber}
-                                </th>
-                                <th
-                                    scope="row"
-                                    className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                >
-                                    {item.isAdmin ? 'Admin' : 'User'}
-                                </th>
-                                <th
-                                    scope="row"
-                                    className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                >
-                                    {item.isAdmin ? '' : <Button
-                                        onClick={() => changeAdmin(item._id, item)}
-                                    >Change Admin</Button>}
-                                </th>
-                                <th
-                                    scope="row"
-                                    className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                >
-                                    {item.isAdmin ? '' : <Button
-                                        onClick={() => deleteAccount(item._id)}
-                                    >Delete Account</Button>}
-                                </th>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-            {/* <Pagination
+                <table
+                    ref={tableRef}
+                    className="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-auto "
+                >
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" className="px-6 py-3    text-center">
+                                UserName
+                            </th>
+                            <th scope="col" className="px-6 py-3   text-center ">
+                                Email
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-center">
+                                Phone
+                            </th>
+                            <th scope="col" className="px-6 py-3   text-center">
+                                Place
+                            </th>
+                            <th scope="col" className="px-6 py-3  text-center">
+                                Change Admin
+                            </th>
+                            <th scope="col" className="px-6 py-3  text-center">
+                                Delete Account
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data?.map((item, i) => {
+                            return (
+                                <tr key={i}>
+                                    <th
+                                        scope="row"
+                                        className="px-7 py-5 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.name}
+                                    </th>
+                                    <th
+                                        scope="row"
+                                        className="px-7 py-5 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.email}
+                                    </th>
+                                    <th
+                                        scope="row"
+                                        className="px-7 py-5 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.phoneNumber}
+                                    </th>
+                                    <th
+                                        scope="row"
+                                        className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.isAdmin ? 'Admin' : 'User'}
+                                    </th>
+                                    <th
+                                        scope="row"
+                                        className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.isAdmin ? '' : <Button
+                                            onClick={() => changeAdmin(item._id, item)}
+                                        >Change Admin</Button>}
+                                    </th>
+                                    <th
+                                        scope="row"
+                                        className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.isAdmin ? '' : <Button
+                                            onClick={() => deleteAccount(item._id)}
+                                        >Delete Account</Button>}
+                                    </th>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+                {/* <Pagination
                 setPageUi={setPageUi}
                 pageUi={pageUi}
                 page={page}
                 totalPage={totalPage}
                 countProducts={countProducts}
             /> */}
-        </div>
+            </div>
+        </>
     );
 }
 

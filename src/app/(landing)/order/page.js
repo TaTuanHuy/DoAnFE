@@ -14,6 +14,9 @@ function Order() {
 
     useEffect(() => {
         async function getData() {
+            if (!user) {
+                return
+            }
             const token = localStorage.getItem('access_token')
             const response = await getOrderByUserID(user._id, token);
             return setOrder(response);
@@ -31,6 +34,8 @@ function Order() {
             alert('Thay đổi không thành công! Vui lòng thử lại')
         }
     }
+
+    // const changeOrder = async()
 
     return (
         <div className="relative overflow-x-auto shadow-md smt:rounded-lg mt-4"
@@ -104,12 +109,12 @@ function Order() {
                                 >
                                     {item.orderItems.map((order) => {
                                         return (
-                                            <>
+                                            <div key={order._id}>
                                                 <span>
                                                     {order.name} x {order.size} x {order.amount}
                                                 </span>
                                                 <br />
-                                            </>
+                                            </div>
                                         );
                                     })}
                                 </th>
@@ -168,7 +173,7 @@ function Order() {
                     })}
                 </tbody>
             </table>
-        </div>
+        </div >
     )
 }
 
