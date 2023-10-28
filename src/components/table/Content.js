@@ -4,6 +4,7 @@ import TableProduct from "./tableProduct";
 import { Button } from "../ui/button";
 import TableOrder from "./tableOrder";
 import TableUser from "./tableUser";
+import TableReckon from './tableReckon'
 
 function Content({ search }) {
     return (
@@ -29,6 +30,12 @@ function Content({ search }) {
                 <>
                     <h1 className="font-bold text-xl text-center">tất cả người dùng</h1>
                     <TableUser />
+                </>
+            )}
+            {search === 'statistical' && (
+                <>
+                    <h1 className="font-bold text-xl text-center">Thống kê</h1>
+                    <TableReckon />
                 </>
             )}
         </div>

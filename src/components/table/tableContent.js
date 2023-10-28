@@ -35,6 +35,14 @@ function TbContent() {
                         Tất cả user
                     </Link>
                 </div>
+                <div>
+                    <Link
+                        href={"/management?table=statistical"}
+                        className={search === "statistical" && "font-bold text-[#6d3f0a]"}
+                    >
+                        Thống kê
+                    </Link>
+                </div>
             </div>
             <div className=" border-l-[1px] border-slate-900 smt:border-b-[1px] smt:mt-5"></div>
             <Content search={search} />

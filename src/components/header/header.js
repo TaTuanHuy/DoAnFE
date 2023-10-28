@@ -86,7 +86,7 @@ function Header() {
                                     >
                                         <FolderCog />
                                         <Link href={"/management?table=product"}>
-                                            Quản lý sản phẩm
+                                            Quản lý
                                         </Link>
                                     </Button>
                                     <Button

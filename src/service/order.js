@@ -93,5 +93,22 @@ export const deleteOrder = async (id, token) => {
     return response
 }
 
+export const reckonToday = async (currentDate, secondDate) => {
+    const date = {
+        currentDate,
+        secondDate
+    }
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/order/find-by-date`, {
+        method: "POST",
+        body: JSON.stringify(date),
+        headers: {
+            "Content-type": "application/json",
+            // "token": token
+
+        }
+    }).then((res) => res.json())
+    return response
+}
+
 
 
