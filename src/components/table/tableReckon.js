@@ -1,83 +1,157 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
-import Pagination from "../page/Pagination";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import { getAllOrder, isDelivered, getAllUser, changeAmdin, deleteUser, reckonToday } from "@/service/order";
 import { handler } from "tailwindcss-animate";
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 function TableReckon() {
     const tableRef = useRef(null);
-    const [data, setData] = useState();
-
-    // const [pageUi, setPageUi] = useState(1);
-
-    const date = new Date()
-    let month = ''
-    date.getMonth() < 9 ? month = `0${date.getMonth() + 1}` : month = date.getMonth() + 1
-    const currentDate = `${date.getFullYear()}-${month}-${date.getDate()}`
-
-    const [secondDate, setSecondDate] = useState(
-        `${date.getFullYear()}-${month}-${date.getDate() - 1}`
-    );
+    const [firstDate, setFirstDate] = useState(new Date().setUTCHours(0, 0, 0, 0))
+    const [compareDate, setCompareDate] = useState(new Date(new Date().setDate(new Date().getDate() - 1)).setUTCHours(0, 0, 0, 0))
 
     useEffect(() => {
         async function getData() {
-            // const token = localStorage.getItem('access_token')
-            const response = await reckonToday(currentDate, secondDate);
-            setData(response)
+            const response = await reckonToday(firstDate, compareDate);
             return setData(response);
         }
         getData()
-    }, [secondDate])
+    }, [firstDate, compareDate])
 
-    // const changeAdmin = async (id, data) => {
-    //     window.location.reload()
-    //     const token = localStorage.getItem('access_token')
-    //     const update = await changeAmdin(token, id, data)
-    //     if (update.message === 'succesfull') {
-    //         alert('Thay đổi thành công !')
-    //     } else {
-    //         alert('Thay đổi không thành công! Vui lòng thử lại')
-    //     }
-    // }
-
-    // const deleteAccount = async (id) => {
-    //     window.location.reload()
-    //     const token = localStorage.getItem('access_token')
-    //     const deleteValue = await deleteUser(token, id)
-    //     console.log(deleteValue)
-    //     if (deleteValue.message === "successfull") {
-    //         alert('Xóa thành công !')
-    //     } else {
-    //         alert('Xóa không thành công! Vui lòng thử lại')
-    //     }
-    // }
+    // const [data, setData] = useState({
+    //     quantityToday: 0,
+    //     percentQuantity: 0,
+    //     percentTotal: 0,
+    //     turnoverToday: 0,
+    //     orderToday: []
+    // });
+    const [data, setData] = useState({
+        quantityToday: 0,
+        percentQuantity: 0,
+        percentTotal: 0,
+        turnoverToday: 0,
+        orderToday: []
+    });
 
     return (
         <>
-
             <div
-                className="control-tab"
                 style={{
-                    marginBottom: '20px',
-                    border: '1px solid #9d9d9d',
-                    borderRadius: '5px',
-                    padding: '4px 0'
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-around',
+                    margin: '10px 0 15px 0'
                 }}
             >
-                <button
+                <div>
+                    <label
+                        style={{
+                            marginRight: '10px'
+                        }}
+                        for="first-date"
+                    >Thống kê của ngày:
+                    </label>
+                    <DatePicker id='first-date' selected={firstDate} onChange={(date) => setFirstDate(date)} />
+                </div>
+                <div>
+                    <label
+                        style={{
+                            marginRight: '10px'
+                        }}
+                        for="compare-date"
+                    >
+                        So sánh với ngày:
+                    </label>
+                    <DatePicker id='compare-date' selected={compareDate} onChange={(date) => setCompareDate(date)} />
+                </div>
+            </div>
+
+            <div
+                style={{
+                    marginBottom: '10px',
+                    display: 'flex',
+                    // justifyContent: 'space-between'
+                }}
+            >
+                <div
+                    className="compare-item"
                     style={{
-                        padding: '4px 8px',
-                        borderRight: '1px solid #9d9d9d'
+                        width: '250px',
+                        height: '100px',
+                        borderRight: '1px solid',
                     }}
-                >Theo ngày</button>
-                <button
+                >
+                    <h1
+                        style={{
+                            textAlign: 'center',
+                            marginBottom: '5px'
+                        }}
+                    >Order</h1>
+                    <div
+                        style={{
+                            textAlign: 'center',
+                            fontSize: '28px'
+                        }}
+                    >{data.quantityToday} </div>
+                </div>
+
+                <div
+                    className="compare-item"
                     style={{
-                        padding: '4px 8px',
-                        borderRight: '1px solid #9d9d9d'
+                        width: '250px',
+                        height: '100px',
+                        borderRight: '1px solid',
                     }}
-                >Theo tháng</button>
+                >
+                    <h1
+                        style={{
+                            textAlign: 'center',
+                            marginBottom: '5px'
+                        }}
+                    >Percent Quantity</h1>
+                    <div
+                        style={{
+                            textAlign: 'center',
+                            fontSize: '28px'
+                        }}
+                    >
+                        {data.percentQuantity === 100 ?
+                            `Bằng ${data.percentQuantity}%`
+                            : data.percentQuantity > 100 ?
+                                `Tăng ${data.percentQuantity - 100}%`
+                                : `Giảm ${100 - data.percentQuantity}%`
+                        }</div>
+                </div>
+
+                <div
+                    className="compare-item"
+                    style={{
+                        width: '250px',
+                        height: '100px',
+                        borderRight: '1px solid',
+                    }}
+                >
+                    <h1
+                        style={{
+                            textAlign: 'center',
+                            marginBottom: '5px'
+                        }}
+                    >Percent Total</h1>
+                    <div
+                        style={{
+                            textAlign: 'center',
+                            fontSize: '28px'
+                        }}
+                    >{data.percentTotal === 100 ?
+                        `Bằng ${data.percentTotal}%`
+                        : data.percentTotal > 100 ?
+                            `Tăng ${data.percentTotal - 100}%`
+                            : `Giảm ${100 - data.percentTotal}%`}</div>
+                </div>
+
+
             </div>
 
             <DownloadTableExcel
