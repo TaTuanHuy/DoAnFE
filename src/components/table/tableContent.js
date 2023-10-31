@@ -10,33 +10,74 @@ function TbContent() {
 
     return (
         <div className="flex py-[50px] smt:flex-col">
-            <div className="w-[20%] smt:w-screen">
-                <div>
+            <div className="w-[14%] smt:w-screen">
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        height: '50px'
+                    }}
+                >
                     <Link
+                        style={{
+                            paddingLeft: '40px',
+                            fontSize: '18px'
+                        }}
+
                         href={"/management?table=product"}
                         className={search === "product" && "font-bold text-[#6d3f0a]"}
                     >
                         Tất cả sản phẩm
                     </Link>
                 </div>
-                <div>
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        height: '50px'
+                    }}
+                >
                     <Link
+                        style={{
+                            paddingLeft: '40px',
+                            fontSize: '18px'
+                        }}
                         href={"/management?table=order"}
                         className={search === "order" && "font-bold text-[#6d3f0a]"}
                     >
                         Tất cả đơn order
                     </Link>
                 </div>
-                <div>
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        height: '50px'
+                    }}
+                >
                     <Link
+                        style={{
+                            paddingLeft: '40px',
+                            fontSize: '18px'
+                        }}
                         href={"/management?table=user"}
                         className={search === "user" && "font-bold text-[#6d3f0a]"}
                     >
                         Tất cả user
                     </Link>
                 </div>
-                <div>
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        height: '50px'
+                    }}
+                >
                     <Link
+                        style={{
+                            paddingLeft: '40px',
+                            fontSize: '18px'
+                        }}
                         href={"/management?table=statistical"}
                         className={search === "statistical" && "font-bold text-[#6d3f0a]"}
                     >

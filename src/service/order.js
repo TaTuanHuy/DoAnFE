@@ -107,5 +107,19 @@ export const reckonToday = async (startDate, endDate) => {
     return response
 }
 
+export const reckonRange = async (startDate, endDate) => {
+    const date = {
+        startDate, endDate
+    }
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/order/find-by-range`, {
+        method: "POST",
+        body: JSON.stringify(date),
+        headers: {
+            "Content-type": "application/json",
+        }
+    }).then((res) => res.json())
+    return response
+}
+
 
 

@@ -8,7 +8,7 @@ import TableReckon from './tableReckon'
 
 function Content({ search }) {
     return (
-        <div className="w-[80%] py-6 ml-7 space-y-4 smt:w-screen smt:ml-0">
+        <div className="w-[80%] ml-7 mb-7 space-y-4 smt:w-screen smt:ml-0">
             {search === "product" && (
                 <>
                     <h1 className="font-bold text-xl text-center">Tất cả sản phẩm</h1>
