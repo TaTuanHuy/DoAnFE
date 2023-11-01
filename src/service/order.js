@@ -121,5 +121,16 @@ export const reckonRange = async (startDate, endDate) => {
     return response
 }
 
+export const reckonMonth = async (date) => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/order/find-by-month`, {
+        method: "POST",
+        body: JSON.stringify({ date }),
+        headers: {
+            "Content-type": "application/json",
+        }
+    }).then((res) => res.json())
+    return response
+}
+
 
 
