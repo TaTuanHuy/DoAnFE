@@ -27,7 +27,12 @@ function Checkouts({ params }) {
     const [payment, setPayment] = useState("");
     const resultTotal = useMemo(() => {
         let init = 0;
+        if (order.orderItems.length === 0) {
+            let TotalPriceItem = order.buyNow.amount * order.buyNow.price;
+            init += TotalPriceItem;
+        }
         for (const orderItem of order.orderItems) {
+
             let TotalPriceItem = orderItem.amount * orderItem.price;
             init += TotalPriceItem;
         }
@@ -41,12 +46,10 @@ function Checkouts({ params }) {
         });
     }
     async function handleSubmit() {
-        let orders;
-        if (search === "now") {
-            orders = [order.buyNow];
-        } else {
-            orders = order.orderItems;
-        }
+        let orders = {
+            true: [order.buyNow],
+            false: order.orderItems
+        }[search === "now"];
         const data = await createOrder(orders, ship, payment, resultTotal, params.id);
         if (data.message) {
             toast.error("Bạn quên điền thứ gì đó ?", { theme: "dark", position: "top-center" });
