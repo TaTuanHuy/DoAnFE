@@ -109,21 +109,47 @@ function Checkouts({ params }) {
                         />
                     </form>
                 </div>
-                <div className="w-[40%] space-y-3 smt:w-full mdt:w-full">
+                <div className="w-[45%] space-y-3 smt:w-full mdt:w-full">
                     {search === "now" ? (
                         <>
-                            <div className="w-1/2 flex border-b-[1px] border-solid border-gray-400 smt:border-none mdt:w-full ">
+                            <div
+                                className="flex smt:border-none mdt:w-full "
+                                style={{
+                                    alignItems: 'center',
+                                    padding: '5px 0',
+                                    justifyContent: 'space-around',
+                                    margin: '0 0 15px 0',
+                                    border: '1px solid rgb(211 185 185)',
+                                    borderRadius: '10px'
+                                }}
+                            >
                                 <img
                                     src={order.buyNow.image}
-                                    width={70}
+                                    width={80}
                                     height={100}
                                     alt="..."
                                     className=" object-cover"
                                 />
-                                <div className="flex flex-col ">
+                                <div>
                                     <h3 className="font-medium">{order.buyNow.name}</h3>
-                                    <p className="text-gray-500">{order.buyNow.size}</p>
-                                    <p className="text-gray-500">{order.buyNow.amount}</p>
+                                    <div style={{
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                    }}>
+                                        <label
+                                            style={{ minWidth: '80px' }}
+                                        >Size:</label>
+                                        <p className="text-gray-500">{order.buyNow.size}</p>
+                                    </div>
+                                    <div style={{
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                    }}>
+                                        <label
+                                            style={{ minWidth: '80px' }}
+                                        >Số lượng:</label>
+                                        <p className="text-gray-500">{order.buyNow.amount}</p>
+                                    </div>
                                 </div>
                                 <div className="flex justify-center items-center ml-10 ">
                                     {order.buyNow.amount * order.buyNow.price}đ
