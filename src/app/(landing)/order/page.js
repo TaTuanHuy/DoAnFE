@@ -152,9 +152,12 @@ function Order() {
                                     {item.isDelivered
                                         ? ''
                                         : <Button
-                                            onClick={() => handlerDeliver(item._id, item)}
                                         >
-                                            Chỉnh sửa thông tin
+                                            <Link
+                                                href={`/edit-order/${item._id}`}
+                                            >
+                                                Chỉnh sửa thông tin
+                                            </Link>
                                         </Button>
                                     }
                                 </th>

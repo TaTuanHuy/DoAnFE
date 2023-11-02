@@ -72,6 +72,17 @@ export const deleteUser = async (token, id) => {
 }
 
 export const getOrderByUserID = async (id, token) => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/order/user/${id}`, {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+            "token": token
+        }
+    }).then((res) => res.json())
+    return response
+}
+
+export const getOrderByID = async (id, token) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/order/${id}`, {
         method: "GET",
         headers: {

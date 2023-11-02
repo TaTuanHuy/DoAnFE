@@ -161,7 +161,15 @@ function Checkouts({ params }) {
                             {order.orderItems.map((item) => (
                                 <div
                                     key={item.product}
-                                    className="w-1/2 flex border-b-[1px] border-solid border-gray-400 smt:w-screen smt:border-none mdt:w-full "
+                                    className="flex border-b-[1px] border-solid border-gray-400 smt:w-screen smt:border-none mdt:w-full "
+                                    style={{
+                                        alignItems: 'center',
+                                        padding: '5px 0',
+                                        justifyContent: 'space-around',
+                                        margin: '0 0 15px 0',
+                                        border: '1px solid rgb(211 185 185)',
+                                        borderRadius: '10px'
+                                    }}
                                 >
                                     <img
                                         src={item.image}
@@ -172,8 +180,24 @@ function Checkouts({ params }) {
                                     />
                                     <div className="flex flex-col ">
                                         <h3 className="font-medium">{item.name}</h3>
-                                        <p className="text-gray-500">{item.size}</p>
-                                        <p className="text-gray-500">{item.amount}</p>
+                                        <div style={{
+                                            display: 'flex',
+                                            alignItems: 'center'
+                                        }}>
+                                            <label
+                                                style={{ minWidth: '80px' }}
+                                            >Size:</label>
+                                            <p className="text-gray-500">{order.buyNow.size}</p>
+                                        </div>
+                                        <div style={{
+                                            display: 'flex',
+                                            alignItems: 'center'
+                                        }}>
+                                            <label
+                                                style={{ minWidth: '80px' }}
+                                            >Số lượng:</label>
+                                            <p className="text-gray-500">{order.buyNow.amount}</p>
+                                        </div>
                                     </div>
                                     <div className="flex flex-col justify-center items-center ">
                                         {item.amount * item.price}đ
