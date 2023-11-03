@@ -24,15 +24,18 @@ export const getAllOrder = async () => {
 };
 
 export const isDelivered = async (id, data) => {
-    const test = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/order/edit-order/${id}`, {
-        method: "PATCH",
-        body: JSON.stringify(data),
-        headers: {
-            "Content-type": "application/json",
-        },
-    }).then((res) => res.json())
-
-    return test
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/order/deliver-order/${id}`, {
+            method: "PATCH",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json",
+            },
+        });
+        return await response.json();
+    } catch (err) {
+        return res.status(400).json({ message: err });
+    }
 }
 
 
@@ -141,6 +144,22 @@ export const reckonMonth = async (date) => {
         }
     }).then((res) => res.json())
     return response
+}
+
+
+export const editOrder = async (id, data) => {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/order/edit-order/${id}`, {
+            method: "PATCH",
+            body: JSON.stringify({ data }),
+            headers: {
+                "Content-type": "application/json",
+            }
+        })
+        return await response.json();
+    } catch (err) {
+        return res.status(400).json({ message: err });
+    }
 }
 
 

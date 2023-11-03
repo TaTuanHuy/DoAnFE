@@ -6,7 +6,7 @@ import { UserSquare2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useMemo, useState } from "react";
-import { createOrder } from "@/service/order";
+import { editOrder } from "@/service/order";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { reset } from "@/redux/features/counter/orderSlice";
@@ -16,43 +16,16 @@ import { getOrderByID } from '@/service/order'
 import { current } from "@reduxjs/toolkit";
 
 function EditOrder({ params }) {
-    // const dispath = useDispatch();
-    // const user = useSelector((state) => state.auth.user);
-    // const order = useSelector((state) => state.order);
-    const [data, setData] = useState({
-        // shippingAddress: {
-        //     fullName: '',
-        //     address: '',
-        //     city: '',
-        //     phone: ''
-        // },
-        // _id: '',
-        // orderItems: [
-        //     {
-        //         name: '',
-        //         amount: 2,
-        //         size: '',
-        //         image: '',
-        //         price: '',
-        //         product: '',
-        //         _id: ''
-        //     }
-        // ],
-        // paymentMethod: '',
-        // totalPrice: 0,
-        // user: '',
-    })
-    // const [edit, setEdit] = useState({});
+    const [data, setData] = useState({})
+    const [edit, setEdit] = useState({});
     useEffect(() => {
         const getData = async () => {
             const token = localStorage.getItem('access_token')
             const response = await getOrderByID(params.id, token)
             setData(response)
-            // setEdit(response)
         }
         getData()
     }, [])
-    // const [payment, setPayment] = useState("");
 
     const totalPrice = (orderItems) => {
         const result = orderItems?.reduce((total, orderItem) => {
@@ -63,24 +36,18 @@ function EditOrder({ params }) {
 
     function handleSetShipping(e) {
         setData({
-            ...edit,
-            [e.name]: e.value,
+            ...data,
+            shippingAddress: {
+                ...data.shippingAddress,
+                [e.name]: e.value,
+            }
         });
     }
-    // console.log('edit: ', edit)
-    // async function handleSubmit() {
-    //     let orders = {
-    //         true: [order.buyNow],
-    //         false: order.orderItems
-    //     }[search === "now"];
-    //     const data = await createOrder(orders, ship, payment, resultTotal, params.id);
-    //     if (data.message) {
-    //         toast.error("Bạn quên điền thứ gì đó ?", { theme: "dark", position: "top-center" });
-    //     } else {
-    //         toast.success("Đặt Hàng Thành Công", { theme: "dark", position: "top-center" });
-    //         dispath(reset());
-    //     }
-    // }
+
+    async function handleEditOrder(id) {
+        const result = await editOrder(id, data)
+        result.message === 'Successfully' ? alert('Chỉnh sửa thành công') : alert("Chỉnh sửa thất bại")
+    }
     return (
         <div className="container min-h-[800px] smt:w-screen smt:px-4 mdt:w-screen">
             <h1 className="py-6 text-[14px] uppercase">
@@ -124,54 +91,52 @@ function EditOrder({ params }) {
                     </form>
                 </div>
                 <div className="w-[45%] space-y-3 smt:w-full mdt:w-full">
-                    <>
-                        {data.orderItems?.map((item) => (
-                            <div
-                                key={item.product}
-                                className="flex border-b-[1px] border-solid border-gray-400 smt:w-screen smt:border-none mdt:w-full "
-                                style={{
-                                    alignItems: 'center',
-                                    padding: '5px 0',
-                                    justifyContent: 'space-around',
-                                    margin: '0 0 15px 0',
-                                    border: '1px solid rgb(211 185 185)',
-                                    borderRadius: '10px'
-                                }}
-                            >
-                                <img
-                                    src={item.image}
-                                    width={80}
-                                    height={90}
-                                    alt="..."
-                                    className="object-cover"
-                                />
-                                <div className="flex flex-col ">
-                                    <h3 className="font-medium">{item.name}</h3>
-                                    <div style={{
-                                        display: 'flex',
-                                        alignItems: 'center'
-                                    }}>
-                                        <label
-                                            style={{ minWidth: '80px' }}
-                                        >Size:</label>
-                                        <p className="text-gray-500">{item.size}</p>
-                                    </div>
-                                    <div style={{
-                                        display: 'flex',
-                                        alignItems: 'center'
-                                    }}>
-                                        <label
-                                            style={{ minWidth: '80px' }}
-                                        >Số lượng:</label>
-                                        <p className="text-gray-500">{item.amount}</p>
-                                    </div>
+                    {data.orderItems?.map((item) => (
+                        <div
+                            key={item.product}
+                            className="flex border-b-[1px] border-solid border-gray-400 smt:w-screen smt:border-none mdt:w-full "
+                            style={{
+                                alignItems: 'center',
+                                padding: '5px 0',
+                                justifyContent: 'space-around',
+                                margin: '0 0 15px 0',
+                                border: '1px solid rgb(211 185 185)',
+                                borderRadius: '10px'
+                            }}
+                        >
+                            <img
+                                src={item.image}
+                                width={80}
+                                height={90}
+                                alt="..."
+                                className="object-cover"
+                            />
+                            <div className="flex flex-col ">
+                                <h3 className="font-medium">{item.name}</h3>
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center'
+                                }}>
+                                    <label
+                                        style={{ minWidth: '80px' }}
+                                    >Size:</label>
+                                    <p className="text-gray-500">{item.size}</p>
                                 </div>
-                                <div className="flex flex-col justify-center items-center ">
-                                    {item.amount * item.price}đ
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center'
+                                }}>
+                                    <label
+                                        style={{ minWidth: '80px' }}
+                                    >Số lượng:</label>
+                                    <p className="text-gray-500">{item.amount}</p>
                                 </div>
                             </div>
-                        ))}
-                    </>
+                            <div className="flex flex-col justify-center items-center ">
+                                {item.amount * item.price}đ
+                            </div>
+                        </div>
+                    ))}
                     <h3>
                         Tổng Tiền :{" "}
                         <span className="float-right font-bold">
@@ -201,7 +166,6 @@ function EditOrder({ params }) {
                         name="Payment"
                         value="Thanh Toán khi nhận"
                         checked
-                        onChange={(e) => handleSetShipping(e.target.value)}
                     />
                     <label htmlFor="faceToFace">Thanh toán khi nhận hàng</label>
                     <br />
@@ -210,17 +174,21 @@ function EditOrder({ params }) {
                         id="paypal"
                         name="Payment"
                         value="Payment"
-                        onChange={(e) => handleSetShipping(e.target.value)}
+                    // onChange={(e) => handleSetShipping(e.target.value)}
                     />
                     <label htmlFor="paypal">Paypal</label>
                 </form>
                 <div className="h-[100px]">
                     <Button
                         variant="none"
-                        onClick={() => handleSubmit()}
+                        onClick={() => handleEditOrder(data._id)}
                         className="float-right  h-12 bg-[#6d3f0a] text-white hover:bg-[#9b7e5e] mt-5"
                     >
-                        Xác Nhận
+                        <Link
+                            href={'/order'}
+                        >
+                            Xác nhận chỉnh sửa
+                        </Link>
                     </Button>
                 </div>
             </div>
