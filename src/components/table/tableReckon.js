@@ -5,10 +5,11 @@ import 'react-datepicker/dist/react-datepicker.css'
 import ReckonTabDay from "./ReckonTabDay";
 import ReckonTabRange from "./ReckonTabRange";
 import ReckonTabMonth from "./ReckonTabMonth";
+import ReckonBestSale from "./ReckonBestSale";
 
 function TableReckon() {
 
-    const tabs = ['Days', 'Month', 'Range']
+    const tabs = ['Days', 'Month', 'Range', 'BestSale']
     const [reckonTab, setReckonTab] = useState(tabs[0])
 
     const [checked, setCheck] = useState(reckonTab)
@@ -24,6 +25,7 @@ function TableReckon() {
             <div
                 style={{
                     border: '1px solid',
+                    marginBottom: '10px'
                 }}
             >
                 {tabs.map(tab => {
@@ -75,6 +77,11 @@ function TableReckon() {
             {
                 reckonTab === 'Month' && (
                     <ReckonTabMonth />
+                )
+            }
+            {
+                reckonTab === 'BestSale' && (
+                    <ReckonBestSale />
                 )
             }
         </>

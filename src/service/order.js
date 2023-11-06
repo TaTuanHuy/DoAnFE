@@ -143,5 +143,15 @@ export const reckonMonth = async (date) => {
     return response
 }
 
+export const reckonBestSale = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/product/best-sale`, {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+        }
+    }).then((res) => res.json())
+    return response
+}
+
 
 
