@@ -86,6 +86,7 @@ export const getOrderByUserID = async (id, token) => {
 }
 
 export const getOrderByID = async (id, token) => {
+    console.log('id: ', id)
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/order/${id}`, {
         method: "GET",
         headers: {

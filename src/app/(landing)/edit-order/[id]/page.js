@@ -181,7 +181,7 @@ function EditOrder({ params }) {
                 <div className="h-[100px]">
                     <Button
                         variant="none"
-                        onClick={() => handleEditOrder(data._id)}
+                        onClick={() => handleEditOrder(params.id)}
                         className="float-right  h-12 bg-[#6d3f0a] text-white hover:bg-[#9b7e5e] mt-5"
                     >
                         <Link

@@ -61,3 +61,20 @@ export const rf = async (refresh_token) => {
     const data = await res.json();
     return data;
 };
+
+
+export const editUser = async (data, id, token) => {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/users/update/${id}`, {
+            method: "PATCH",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json",
+                token
+            }
+        })
+        return await response.json();
+    } catch (err) {
+        return res.status(400).json({ message: err });
+    }
+}

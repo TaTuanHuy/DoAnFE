@@ -1,12 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import {editUser} from "../../../service/user"
 
 function Profile() {
     const user = useSelector((state) => state.auth.user);
-    const token = useSelector((state) => state.auth.accessToken);
     const [edit, setEdit] = useState(false);
 
     const [name, setName] = useState("");
@@ -19,21 +19,13 @@ function Profile() {
         setPhone(user?.phoneNumber);
     }, [user]);
 
-    function hanldleSubmit() {
-        fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/users/update/${user._id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                token: token,
-            },
-            body: JSON.stringify({
-                name: name,
-                email: email,
-                phoneNumber: phone,
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => console.log(res));
+    async function hanldleSubmit(id) {
+        const token = localStorage.getItem('access_token')
+        const response = await editUser({
+            name: name,
+            email: email,
+            phoneNumber: phone,
+        }, id, token)
     }
     return (
         <div className="container h-[500px] smt:h-[800px] smt:px-4">
@@ -91,7 +83,7 @@ function Profile() {
                                 />
                                 <Button
                                     className=" float-right w-[60px] mt-3 smt:float-left"
-                                    onClick={() => hanldleSubmit()}
+                                    onClick={() => hanldleSubmit(user?._id)}
                                 >
                                     Submit
                                 </Button>
