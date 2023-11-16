@@ -12,7 +12,7 @@ function InputHeader() {
     const [result, setResult] = useState("");
     const [data, setData] = useState({});
     const [isLoading, setisLoading] = useState(false);
-    let debounce = useDebounce(result, 800);
+    let debounce = useDebounce(result, 8000);
     useEffect(() => {
         setisLoading(true);
         fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/product/panigated/search?filter=${debounce}`)

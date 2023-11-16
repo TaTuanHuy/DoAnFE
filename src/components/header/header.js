@@ -1,6 +1,5 @@
 "use client";
 import {
-    Contact,
     Store,
     ShoppingCart,
     User,
