@@ -19,8 +19,6 @@ function ReckonBestSale() {
         getData()
     }, [])
 
-console.log(data)
-
     return (
         <>
 
@@ -36,10 +34,9 @@ console.log(data)
 
             <div className="relative overflow-x-auto shadow-md smt:rounded-lg"
                 style={{
-                    maxHeight: '650px'
+                    maxHeight: '500px'
                 }}
             >
-                <>
                     <table
                         ref={tableRef}
                         className="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-auto "
@@ -102,7 +99,6 @@ console.log(data)
                             })}
                         </tbody>
                     </table>
-                </>
             </div>
         </>
     );

@@ -111,7 +111,6 @@ function Checkouts({ params }) {
                 </div>
                 <div className="w-[45%] space-y-3 smt:w-full mdt:w-full">
                     {search === "now" ? (
-                        <>
                             <div
                                 className="flex smt:border-none mdt:w-full "
                                 style={{
@@ -155,7 +154,6 @@ function Checkouts({ params }) {
                                     {order.buyNow.amount * order.buyNow.price}đ
                                 </div>
                             </div>
-                        </>
                     ) : (
                         <>
                             {order.orderItems.map((item) => (

@@ -75,7 +75,7 @@ function TableOrder() {
             </div>
             <div className="relative overflow-x-auto shadow-md smt:rounded-lg"
                 style={{
-                    maxHeight: '650px'
+                    maxHeight: '600px'
                 }}
             >
                 <table

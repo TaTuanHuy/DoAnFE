@@ -10,7 +10,12 @@ function TbContent() {
 
     return (
         <div className="flex py-[50px] smt:flex-col">
-            <div className="w-[14%] smt:w-screen">
+            <div 
+                className="w-[14%] smt:w-screen"
+                style={{
+                    position: 'fixed'
+                }}
+            >
                 <div
                     style={{
                         display: 'flex',
@@ -85,7 +90,12 @@ function TbContent() {
                     </Link>
                 </div>
             </div>
-            <div className=" border-l-[1px] border-slate-900 smt:border-b-[1px] smt:mt-5"></div>
+            <div
+                style={{
+                    marginLeft: '14%'
+                }}
+                className=" border-l-[1px] border-slate-900 smt:border-b-[1px] smt:mt-5"
+            ></div>
             <Content search={search} />
             <ToastContainer />
         </div>
