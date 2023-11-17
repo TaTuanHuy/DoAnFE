@@ -117,9 +117,15 @@ function ReckonTabMonth() {
                 </Button>
             </DownloadTableExcel>
 
+            <h1
+                style={{
+                    fontWeight: '700'
+                }}
+            >Tất cả các đơn hàng đã đặt</h1>           
+
             <div className="relative overflow-x-auto shadow-md smt:rounded-lg"
                 style={{
-                    maxHeight: '650px'
+                    maxHeight: '400px'
                 }}
             >
                     <table
@@ -221,6 +227,94 @@ function ReckonTabMonth() {
                         </tbody>
                     </table>
             </div>
+
+            <h1
+                style={{
+                    marginTop: '25px',
+                    fontWeight: '700'
+                }}
+            >Sản phẩm bán chạy</h1>
+            <ul
+                className="relative overflow-x-auto"
+                style={{
+                    maxHeight: '300px'
+                }}
+            >
+                {data?.productsBestSale?.map((item) => {
+                    return (
+                        <li
+                            key={item?.product}
+                            style={{
+                                display: 'flex',
+                                // alignItems:'center',
+                                justifyContent: 'space-between',
+                                padding: '8px 16px',
+                                border: '1px solid rgba(151, 145, 145, 0.3)',
+                                borderRadius: '15px',
+                                marginBottom: '10px'
+                            }}
+                        >
+                            <img
+                            style={{
+                                height: '80px',
+                                width: '80px'
+                            }}
+                            src={item?.image}
+                            >
+                            </img>
+                            <div>
+                                <h2
+                                    style={{
+                                        fontSize: '18px',
+                                        marginBottom: '10px'
+                                    }}
+                                >{item?.name}</h2>
+                                <div
+                                    style={{
+                                        width: '400px'
+                                    }}
+                                >
+                                    <label
+                                        style={{
+                                            marginRight: '10px'
+                                        }}
+                                    >Giá bán:</label>
+                                    <label>{item?.price}đ</label>
+                                </div>
+                            </div>
+                            <div>
+                                <h3
+                                    style={{
+                                        marginBottom: '10px'
+                                    }}
+                                >Số lượng đã bán</h3>
+                                <p
+                                    style={{
+                                        textAlign: 'center'
+                                    }}
+                                >{item?.amount}</p>
+                            </div>
+                            <div
+                                style={{
+                                    width: '150px'
+                                }}
+                            >
+                                <h3
+                                    style={{
+                                        textAlign: 'center',
+                                        marginBottom: '10px'
+                                    }}
+                                >Tổng tiền thu lại</h3>
+                                <p
+                                    style={{
+                                        textAlign: 'center'
+                                    }}
+                                >{item?.amount * Number(item?.price)}đ</p>
+                            </div>
+                        </li>
+                    )
+                })}
+            </ul>
         </>
     );
 }
