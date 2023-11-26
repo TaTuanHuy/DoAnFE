@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import Pagination from "../page/Pagination";
 import { DownloadTableExcel } from "react-export-table-to-excel";
-import { getAllOrder, isDelivered } from "@/service/order";
+import { getAllOrder, isDelivered, deleteOrder } from "@/service/order";
 import { handler } from "tailwindcss-animate";
 import { Dialog } from "@radix-ui/react-dialog";
 
@@ -39,6 +39,11 @@ function TableOrder() {
         window.location.reload()
         data.isDelivered = true
         await isDelivered(id, data)
+    }
+
+    const handleDeleteOrder = async(id) => {
+        window.location.reload()
+        deleteOrder(id)
     }
 
     return (
@@ -108,7 +113,10 @@ function TableOrder() {
                             <th scope="col" className="px-6 py-3 text-center">
                                 isDelivered
                             </th>
-                            <th scope="col" colSpan={2} className="px-6 py-3 ">
+                            <th scope="col" className="px-6 py-3 ">
+                                Action
+                            </th>
+                            <th scope="col" className="px-6 py-3 ">
                                 Action
                             </th>
                         </tr>
@@ -116,7 +124,11 @@ function TableOrder() {
                     <tbody>
                         {dataRender?.map((item, i) => {
                             return (
-                                <tr key={item._id}>
+                                <tr
+                                style={{
+                                    height: '100px'
+                                }}   
+                                key={item._id}>
                                     <th
                                         scope="row"
                                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -181,6 +193,16 @@ function TableOrder() {
                                                 onClick={() => handlerDeliver(item._id, item)}
                                             >
                                                 Đã giao
+                                            </Button>
+                                        }
+                                    </th>
+                                    <th>
+                                        {item.isDelivered
+                                            ? ''
+                                            : <Button
+                                                onClick={() =>handleDeleteOrder(item._id)}
+                                            >
+                                                Hủy đơn hàng
                                             </Button>
                                         }
                                     </th>

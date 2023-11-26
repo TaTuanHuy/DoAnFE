@@ -13,8 +13,8 @@ function Content({ search }) {
                 <>
                     <h1 className="font-bold text-xl text-center">Tất cả sản phẩm</h1>
                     <NewAndUpdateProduct title={"Create some new product"} create>
-                        <Button variant="none">
-                            <PlusSquare size={100} />
+                        <Button>
+                            Thêm mới sản phẩm
                         </Button>
                     </NewAndUpdateProduct>
                     <TableProduct />
@@ -28,7 +28,7 @@ function Content({ search }) {
             )}
             {search === 'user' && (
                 <>
-                    <h1 className="font-bold text-xl text-center">tất cả người dùng</h1>
+                    <h1 className="font-bold text-xl text-center">Tất cả người dùng</h1>
                     <TableUser />
                 </>
             )}
