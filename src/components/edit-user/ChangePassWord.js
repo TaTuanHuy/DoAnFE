@@ -63,21 +63,6 @@ function ChangePassWord() {
                     className="w-[350px] py-1 px-3 ml-3 smt:w-[230px]"
                     onChange={(e) => setNewPassWord(e.target.value)}
                 />
-                <label htmlFor="repeat-new_password" className="font-bold">
-                    Nhắc lại mật khẩu mới
-                </label>
-                <input
-                    style={{
-                        border: '1px solid',
-                        borderRadius: '5px',
-                        marginTop: '8px'
-                    }}
-                    type="password"
-                    id="repeat-new_password"
-                    name="repeat-new_password"
-                    className="w-[350px] py-1 px-3 ml-3 smt:w-[230px]"
-                    onChange={(e) => setRepeatNewPassWord(e.target.value)}
-                />
                 <Button
                     className=" float-right w-[100px] mt-3 smt:float-left"
                     onClick={() => hanldleSubmit(user?._id)}
