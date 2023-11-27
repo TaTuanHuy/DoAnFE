@@ -35,33 +35,40 @@ function Profile() {
                     {profile === 'default' && <DefaultProfile />}
                     {profile === 'edit' && <EditProfile />}
                     {profile === 'edit-password' && <ChangePassWord />}
-                    {
-                        profile === 'edit' ? '' : 
-                        <Button
-                            style={{
-                                marginTop: '10px'
-                            }}
-                            onClick={() => {
-                                changeProfile('edit')
-                            }}
-                        >
-                            Edit
-                        </Button>
-                    }
-                    {
-                        profile === 'edit-password' ? '' : 
-                        <Button
-                            style={{
-                                marginTop: '10px',
-                                marginLeft: '10px'
-                            }}
-                            onClick={() => {
-                                changeProfile('edit-password')
-                            }}
-                        >
-                            Edit PassWord
-                        </Button>
-                    }
+                   <div
+                    style={{
+                        display: 'flex',
+                        flexDirection:'row-reverse'
+                    }}
+                   >
+                        {
+                            profile === 'edit' ? '' : 
+                            <Button
+                                style={{
+                                    marginTop: '10px',
+                                    marginLeft: '10px'
+                                }}
+                                onClick={() => {
+                                    changeProfile('edit')
+                                }}
+                            >
+                                Chỉnh sửa thông tin
+                            </Button>
+                        }
+                        {
+                            profile === 'edit-password' ? '' : 
+                            <Button
+                                style={{
+                                    marginTop: '10px',
+                                }}
+                                onClick={() => {
+                                    changeProfile('edit-password')
+                                }}
+                            >
+                                Chỉnh sửa mật khẩu
+                            </Button>
+                        }
+                   </div>
                 </div>
             </div>
         </div>
