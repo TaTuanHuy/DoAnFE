@@ -10,7 +10,7 @@ import { createOrder } from "@/service/order";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { reset } from "@/redux/features/counter/orderSlice";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 function Checkouts({ params }) {
     const searchParams = useSearchParams();
@@ -18,6 +18,7 @@ function Checkouts({ params }) {
     const dispath = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const order = useSelector((state) => state.order);
+    const router = useRouter()
     const [ship, setShip] = useState({
         fullName: "",
         address: "",
@@ -56,6 +57,7 @@ function Checkouts({ params }) {
         } else {
             toast.success("Đặt Hàng Thành Công", { theme: "dark", position: "top-center" });
             dispath(reset());
+            router.push('/order')
         }
     }
     return (
@@ -258,7 +260,6 @@ function Checkouts({ params }) {
                     </Button>
                 </div>
             </div>
-            {/* <h1>HOẶC</h1> */}
 
             <ToastContainer />
         </div>

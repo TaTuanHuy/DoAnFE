@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { getOrderByUserID, deleteOrder } from "../../../service/order"
+import HandleOrder from "@/components/handleOrder/DialogManagementOrder";
 
 function Order() {
     const tableRef = useRef(null);
@@ -23,19 +24,6 @@ function Order() {
         }
         getData();
     }, [user]);
-
-    const userDeleteOrder = async (id) => {
-        window.location.reload()
-        const token = localStorage.getItem('access_token')
-        const response = await deleteOrder(id, token)
-        if (response.message === 'successfull') {
-            alert('Thay đổi thành công !')
-        } else {
-            alert('Thay đổi không thành công! Vui lòng thử lại')
-        }
-    }
-
-    // const changeOrder = async()
 
     return (
         <div className="relative overflow-x-auto shadow-md smt:rounded-lg mt-4"
@@ -164,11 +152,14 @@ function Order() {
                                 <th>
                                     {item.isDelivered
                                         ? ''
-                                        : <Button
-                                            onClick={() => userDeleteOrder(item._id)}
+                                        : 
+                                        <HandleOrder
+                                            title={"Delete"} deleted id={item._id}
                                         >
-                                            Hủy đặt hàng
-                                        </Button>
+                                            <Button>
+                                                Hủy đơn hàng
+                                            </Button>
+                                        </HandleOrder>
                                     }
                                 </th>
                             </tr>

@@ -4,8 +4,7 @@ import { Button } from "../ui/button";
 import Pagination from "../page/Pagination";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import { getAllOrder, isDelivered, deleteOrder } from "@/service/order";
-import { handler } from "tailwindcss-animate";
-import { Dialog } from "@radix-ui/react-dialog";
+import HandleOrder from "../handleOrder/DialogManagementOrder"
 
 function TableOrder() {
     const tableRef = useRef(null);
@@ -33,17 +32,6 @@ function TableOrder() {
             return item.isDelivered === condition
         })
         return setDataRender(result)
-    }
-
-    const handlerDeliver = async (id, data) => {
-        window.location.reload()
-        data.isDelivered = true
-        await isDelivered(id, data)
-    }
-
-    const handleDeleteOrder = async(id) => {
-        window.location.reload()
-        deleteOrder(id)
     }
 
     return (
@@ -189,21 +177,30 @@ function TableOrder() {
                                     <th>
                                         {item.isDelivered
                                             ? ''
-                                            : <Button
-                                                onClick={() => handlerDeliver(item._id, item)}
+                                            :
+                                            <HandleOrder
+                                                title={"Change Deliver"} 
+                                                delivered 
+                                                id={item._id}
+                                                item={item}
                                             >
-                                                Đã giao
-                                            </Button>
+                                                <Button>
+                                                    Xác nhận đã giao
+                                                </Button>
+                                            </HandleOrder>
                                         }
                                     </th>
                                     <th>
                                         {item.isDelivered
                                             ? ''
-                                            : <Button
-                                                onClick={() =>handleDeleteOrder(item._id)}
+                                            : 
+                                            <HandleOrder
+                                                title={"Delete"} deleted id={item._id}
                                             >
-                                                Hủy đơn hàng
-                                            </Button>
+                                                <Button>
+                                                    Hủy đơn hàng
+                                                </Button>
+                                            </HandleOrder>
                                         }
                                     </th>
                                 </tr>

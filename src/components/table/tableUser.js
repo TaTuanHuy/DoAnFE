@@ -1,10 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
-import Pagination from "../page/Pagination";
 import { DownloadTableExcel } from "react-export-table-to-excel";
-import { getAllOrder, isDelivered, getAllUser, changeAmdin, deleteUser } from "@/service/order";
-import { handler } from "tailwindcss-animate";
+import { getAllUser } from "@/service/order";
+import HandleUser from "./DialogManagementUser";
 
 function TableUser() {
     const tableRef = useRef(null);
@@ -21,29 +20,6 @@ function TableUser() {
         }
         getData()
     }, [])
-
-    const changeAdmin = async (id, data) => {
-        window.location.reload()
-        const token = localStorage.getItem('access_token')
-        const update = await changeAmdin(token, id, data)
-        if (update.message === 'succesfull') {
-            alert('Thay đổi thành công !')
-        } else {
-            alert('Thay đổi không thành công! Vui lòng thử lại')
-        }
-    }
-
-    const deleteAccount = async (id) => {
-        window.location.reload()
-        const token = localStorage.getItem('access_token')
-        const deleteValue = await deleteUser(token, id)
-        console.log(deleteValue)
-        if (deleteValue.message === "successfull") {
-            alert('Xóa thành công !')
-        } else {
-            alert('Xóa không thành công! Vui lòng thử lại')
-        }
-    }
 
     return (
         <>
@@ -119,30 +95,32 @@ function TableUser() {
                                         scope="row"
                                         className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                     >
-                                        {item.isAdmin ? '' : <Button
-                                            onClick={() => changeAdmin(item._id, item)}
-                                        >Change Admin</Button>}
+                                        {item.isAdmin 
+                                        ? '' : 
+                                        <HandleUser
+                                            title={"Change Admin"} update id={item._id} item={item}
+                                        >
+                                            <Button>Change Admin</Button>
+                                        </HandleUser>}
                                     </th>
                                     <th
                                         scope="row"
                                         className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                     >
-                                        {item.isAdmin ? '' : <Button
-                                            onClick={() => deleteAccount(item._id)}
-                                        >Delete Account</Button>}
+                                        {item.isAdmin 
+                                        ? '' 
+                                        :
+                                        <HandleUser
+                                            title={"Delete"} deleted id={item._id}
+                                        >
+                                            <Button>Delete Account</Button>
+                                        </HandleUser>}
                                     </th>
                                 </tr>
                             );
                         })}
                     </tbody>
                 </table>
-                {/* <Pagination
-                setPageUi={setPageUi}
-                pageUi={pageUi}
-                page={page}
-                totalPage={totalPage}
-                countProducts={countProducts}
-            /> */}
             </div>
         </>
     );
