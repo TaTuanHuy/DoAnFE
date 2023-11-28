@@ -3,36 +3,43 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import {editUser} from "../../service/user"
+import {updatePassWord} from "../../service/user"
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 function ChangePassWord() {
     const user = useSelector((state) => state.auth.user);
+    const router = useRouter()
 
     const [oldPassWord, setOldPassWord] = useState("");
     const [newPassWord, setNewPassWord] = useState("");
-    const [repeatNewPassWord, setRepeatNewPassWord] = useState("");
-
-    // useEffect(() => {
-    //     setName(user?.name);
-    //     setEmail(user?.email);
-    //     setPhone(user?.phoneNumber);
-    // }, [user]);
 
     async function hanldleSubmit(id) {
         const token = localStorage.getItem('access_token')
-        console.log("check")
-        // const response = await editUser({
-        //     name: name,
-        //     email: email,
-        //     phoneNumber: phone,
-        // }, id, token)
+        if(newPassWord.length < 6){
+            setOldPassWord('')
+            setNewPassWord('')
+            return alert('Vui lòng nhập mật khẩu mới tối thiểu 6 kí tự')
+        }
+        const response = await updatePassWord(id, {
+            old_password: oldPassWord,
+            new_password: newPassWord
+        }, token)   
+        if(response.status === 403){
+            setOldPassWord('')
+            setNewPassWord('')
+            return alert('Bạn đã nhập sai mật khẩu cũ! Vui lòng thử lại!')
+        }
+        alert('Thay đổi mật khẩu thành công! Vui lòng đăng nhập lại!')
+        localStorage.clear()
+        router.push('/signin')
     }
 
     return (
         <>
             <h2 className="text-xl font-bold mb-3 w-screen">Cập nhật mật khẩu</h2>
 
-            <form className="flex flex-col">
+            <div className="flex flex-col">
                 <label htmlFor="old-password" className="font-bold">
                     Mật khẩu cũ
                 </label>
@@ -45,6 +52,7 @@ function ChangePassWord() {
                     type="password"
                     id="old-password"
                     name="old_password"
+                    value={oldPassWord}
                     className="w-[350px] py-1 px-3 ml-3 smt:w-[130px]"
                     onChange={(e) => setOldPassWord(e.target.value)}
                 />
@@ -60,6 +68,7 @@ function ChangePassWord() {
                     type="password"
                     id="new_password"
                     name="new_password"
+                    value={newPassWord}
                     className="w-[350px] py-1 px-3 ml-3 smt:w-[230px]"
                     onChange={(e) => setNewPassWord(e.target.value)}
                 />
@@ -69,7 +78,7 @@ function ChangePassWord() {
                 >
                     Cập nhật
                 </Button>
-            </form>
+            </div>
         </>
     ) }
 
