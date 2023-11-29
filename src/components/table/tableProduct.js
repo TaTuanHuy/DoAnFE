@@ -18,7 +18,7 @@ function TableProduct() {
                 const res = await getAllProduct(pageUi);
                 setDataValue(res);
             } catch (error) {
-                console.error(error);
+                return error
             }
         };
         fetchData();

@@ -3,10 +3,7 @@ import DetailItem from "@/components/detailItem/detailItem";
 import SliderItem from "@/components/listItem/slideitem";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { useEffect, useState } from "react";
-import useSWR from "swr";
 
-// import { useParams } from "next/navigation";
 async function Girl({ params }) {
 
     const product = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/product/${params.id}`, {
@@ -15,8 +12,6 @@ async function Girl({ params }) {
     if (product?.status === 400) {
         notFound();
     }
-
-    // console.log('check: ', product)
 
     return (
         <div className=" mb-52">

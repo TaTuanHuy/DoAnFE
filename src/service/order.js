@@ -1,5 +1,5 @@
 export const createOrder = async (orders, ship, payment, total, id) => {
-    const param = await {
+    const param = {
         orderItems: orders,
         shippingAddress: ship,
         paymentMethod: payment,
@@ -86,7 +86,6 @@ export const getOrderByUserID = async (id, token) => {
 }
 
 export const getOrderByID = async (id, token) => {
-    console.log('id: ', id)
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/order/${id}`, {
         method: "GET",
         headers: {

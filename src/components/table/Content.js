@@ -1,4 +1,3 @@
-import { PlusSquare } from "lucide-react";
 import NewAndUpdateProduct from "./formManagement";
 import TableProduct from "./tableProduct";
 import { Button } from "../ui/button";

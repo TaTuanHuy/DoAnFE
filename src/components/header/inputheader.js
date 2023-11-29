@@ -4,7 +4,6 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import Link from "next/link";
 import style from "./header.module.css";
-import { RefreshCcw } from "lucide-react";
 
 import { useEffect, useState } from "react";
 import useDebounce from "@/hooks/useDebounce";

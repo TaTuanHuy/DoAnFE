@@ -55,7 +55,6 @@ export const orderSlice = createSlice({
         removeOrder: (state, action) => {
             const { productId } = action.payload;
             const itemOder = state?.orderItems?.filter((item) => item?.product !== productId);
-            console.log(current(state));
             state.orderItems = itemOder;
         },
         reset: (state) => {

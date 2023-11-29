@@ -9,8 +9,6 @@ function TableUser() {
     const tableRef = useRef(null);
     const [data, setData] = useState();
 
-    const [pageUi, setPageUi] = useState(1);
-
     useEffect(() => {
         async function getData() {
             const token = localStorage.getItem('access_token')
@@ -66,7 +64,7 @@ function TableUser() {
                     <tbody>
                         {data?.map((item, i) => {
                             return (
-                                <tr key={i}>
+                                <tr key={item._id}>
                                     <th
                                         scope="row"
                                         className="px-7 py-5 font-medium text-gray-900 whitespace-nowrap dark:text-white"

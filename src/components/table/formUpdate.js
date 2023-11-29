@@ -42,7 +42,6 @@ function FormUpdate({ id, product }) {
                     updateSizeCheck.push(sizeCheck[i]);
                 }
             }
-            // setSizeCheck(sizeCheck.filter((item) => item !== e.id));
             setSizeCheck(updateSizeCheck);
         }
     }
@@ -54,7 +53,6 @@ function FormUpdate({ id, product }) {
             size: sizeCheck,
         });
     }
-    console.log(valueForm);
     async function handleSubmit() {
         const data = await updateProduct(id, valueForm);
         if (data.message === "missing something ?") {

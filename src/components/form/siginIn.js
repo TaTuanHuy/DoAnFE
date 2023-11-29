@@ -8,19 +8,13 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-    required,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { useRouter, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-
-// import { getUser } from "@/redux/features/counter/counterSlice";
-// import { GetDetailUser } from "@/service/user";
-// import jwtDecode from "jwt-decode";
+import { useState } from "react";
 
 const formSchema = z.object({
     email: z.string().email({}),
@@ -42,10 +36,7 @@ const require = formSchema.required({
 
 function FormSignIn() {
     const [data, setData] = useState({});
-    const dispatch = useDispatch();
     const router = useRouter();
-    const pathname = usePathname();
-    console.log(pathname);
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -63,10 +54,9 @@ function FormSignIn() {
             },
             body: JSON.stringify(values),
         });
-        const result = await response.json().then((data) => {
+        await response.json().then((data) => {
             setData(data);
         });
-        // console.log(values);
     }
 
     if (data?.message) {
@@ -82,21 +72,11 @@ function FormSignIn() {
             </div>
         );
     }
-    // const handleGetUser = async (id, token) => {
-    //     const res = await GetDetailUser(id, token);
-    //     // dispatch(getUser({ res, token }));
-    // };
 
     if (data?.name) {
         router.push("/");
         localStorage.setItem("access_token", data?.accToken);
         localStorage.setItem("refresh_token", data?.refreshTok);
-        // if (data?.accToken) {
-        //     const decoded = jwtDecode(data?.accToken);
-        //     if (decoded?.id) {
-        //         handleGetUser(decoded?.id, data?.accToken);
-        //     }
-        // }
     }
 
     return (

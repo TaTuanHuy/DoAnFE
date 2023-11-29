@@ -1,13 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {editUser} from "../../service/user"
 
 function EditProfile() {
     const user = useSelector((state) => state.auth.user);
-    const [edit, setEdit] = useState(false);
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -21,7 +19,7 @@ function EditProfile() {
 
     async function hanldleSubmit(id) {
         const token = localStorage.getItem('access_token')
-        const response = await editUser({
+        await editUser({
             name: name,
             email: email,
             phoneNumber: phone,

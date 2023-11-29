@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import { reckonBestSale } from "@/service/order";
-import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 function ReckonBestSale() {
