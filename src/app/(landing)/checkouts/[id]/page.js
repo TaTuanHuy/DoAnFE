@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { reset } from "@/redux/features/counter/orderSlice";
 import { useSearchParams, useRouter } from "next/navigation";
+// import PropTypes from 'prop-types';
 
 function Checkouts({ params }) {
     const searchParams = useSearchParams();
@@ -265,5 +266,10 @@ function Checkouts({ params }) {
         </div>
     );
 }
+
+// CheckoutsPage.propTypes ={
+//     params: PropTypes.any.isRequired,
+// }
+
 
 export default Checkouts;

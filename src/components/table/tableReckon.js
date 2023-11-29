@@ -12,10 +12,10 @@ function TableReckon() {
     const tabs = ['Days', 'Month', 'Range', 'BestSale']
     const [reckonTab, setReckonTab] = useState(tabs[0])
 
-    const [checked, setCheck] = useState(reckonTab)
+    const [checked, setChecked] = useState(tabs[0])
 
     const changeReckonTab = (tab) => {
-        setCheck(tab)
+        setChecked(tab)
         setReckonTab(tab)
     }
 

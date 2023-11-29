@@ -30,7 +30,7 @@ function TbContent() {
                         }}
 
                         href={"/management?table=product"}
-                        className={search === "product" && "font-bold text-[#6d3f0a]"}
+                        className={search === "product" ? "font-bold text-[#6d3f0a]" : ""}
                     >
                         Tất cả sản phẩm
                     </Link>
@@ -48,7 +48,7 @@ function TbContent() {
                             fontSize: '18px'
                         }}
                         href={"/management?table=order"}
-                        className={search === "order" && "font-bold text-[#6d3f0a]"}
+                        className={search === "order" ? "font-bold text-[#6d3f0a]" : ""}
                     >
                         Tất cả đơn order
                     </Link>
@@ -66,7 +66,7 @@ function TbContent() {
                             fontSize: '18px'
                         }}
                         href={"/management?table=user"}
-                        className={search === "user" && "font-bold text-[#6d3f0a]"}
+                        className={search === "user" ? "font-bold text-[#6d3f0a]": ""}
                     >
                         Tất cả user
                     </Link>
@@ -84,7 +84,7 @@ function TbContent() {
                             fontSize: '18px'
                         }}
                         href={"/management?table=statistical"}
-                        className={search === "statistical" && "font-bold text-[#6d3f0a]"}
+                        className={search === "statistical" ? "font-bold text-[#6d3f0a]" : ''}
                     >
                         Thống kê
                     </Link>

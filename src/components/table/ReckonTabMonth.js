@@ -42,7 +42,7 @@ function ReckonTabMonth() {
                         style={{
                             marginRight: '10px'
                         }}
-                        for="first-date"
+                        htmlFor="first-date"
                     >Thống kê của tháng:
                     </label>
                     <DatePicker

@@ -135,7 +135,7 @@ function TableProduct() {
                     {Products?.map((dataItem, i) => (
                         <tr
                             className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-cyan-200 dark:hover:bg-gray-600 cursor-pointer "
-                            key={i}
+                            key={dataItem._id}
                         >
                             <td className="w-4 p-4">
                                 <div className="flex items-center">
@@ -164,7 +164,7 @@ function TableProduct() {
                             <td className="px-6 py-4">
                                 {dataItem.size?.map((size, index) => {
                                     return (
-                                        <p key={index}>
+                                        <p key={dataItem._id}>
                                             <span>{size}</span>
                                         </p>
                                     );

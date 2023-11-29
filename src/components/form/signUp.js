@@ -3,12 +3,10 @@ import { Button } from "@/components/ui/button";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
     FormMessage,
-    required,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -71,11 +69,9 @@ function FormSignIn() {
             },
             body: JSON.stringify(values), // body data type must match "Content-Type" header
         });
-        const result = await response.json().then((data) => {
+        await response.json().then((data) => {
             console.log(data);
         }); // parses JSON response into native JavaScript objects
-
-        // console.log(values);
     }
 
     return (
