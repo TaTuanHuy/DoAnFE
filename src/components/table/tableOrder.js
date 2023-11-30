@@ -132,14 +132,16 @@ function TableOrder() {
                                         scope="row"
                                         className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                     >
-                                        {item.orderItems.map((order) => {
+                                        {item.orderItems.map((order, i) => {
                                             return (
-                                                <>
+                                                <div
+                                                    key={order._id + order.size}
+                                                >
                                                     <span>
                                                         {order.name} x {order.size} x {order.amount}
                                                     </span>
                                                     <br />
-                                                </>
+                                                </div>
                                             );
                                         })}
                                     </th>

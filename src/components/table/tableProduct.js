@@ -164,7 +164,7 @@ function TableProduct() {
                             <td className="px-6 py-4">
                                 {dataItem.size?.map((size, index) => {
                                     return (
-                                        <p key={dataItem._id}>
+                                        <p key={size + index}>
                                             <span>{size}</span>
                                         </p>
                                     );
