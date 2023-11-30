@@ -32,7 +32,6 @@ const require = formSchema.required({
     password: true,
 });
 
-// note có một điều trong này chưa fix đó là khi đăng nhập thành công sau 30s token sẽ hết hạn nếu đăng nhập lại sẽ có một res trả về là ko authen vì token hết hạn
 
 function FormSignIn() {
     const [data, setData] = useState({});
