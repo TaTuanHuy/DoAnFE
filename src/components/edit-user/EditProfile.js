@@ -20,13 +20,13 @@ function EditProfile() {
     async function hanldleSubmit(id) {
         const token = localStorage.getItem('access_token')
         if(name === ''){
-            alert('Bạn đã nhập để trống phần tên! Vui lòng thử lại')
+            return alert('Bạn đã nhập để trống phần tên! Vui lòng thử lại')
         }
         if(email === ''){
-            alert('Bạn đã nhập để trống phần email! Vui lòng thử lại')
+             return alert('Bạn đã nhập để trống phần email! Vui lòng thử lại')
         }
         if(phone === '' || phone.length > 10){
-            alert('Bạn đã nhập sai số điện thoại! Vui lòng thử lại')
+             return alert('Bạn đã nhập sai số điện thoại! Vui lòng thử lại')
         }
         const response = await editUser({
             name: name,
@@ -34,9 +34,9 @@ function EditProfile() {
             phoneNumber: phone,
         }, id, token)
         if(response.status === 400){
-            alert(response.message)
+            return alert(response.message)
         }else{
-            alert(response.message)
+            return alert(response.message)
         }
     }
 
@@ -76,6 +76,9 @@ function EditProfile() {
                     onChange={(e) => setPhone(e.target.value)}
                 />
                 <Button
+                    style={{
+                        backgroundColor: 'green'
+                    }}
                     className=" float-right w-[100px] mt-3 smt:float-left"
                     onClick={() => hanldleSubmit(user?._id)}
                 >

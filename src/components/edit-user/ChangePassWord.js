@@ -71,6 +71,9 @@ function ChangePassWord() {
                     onChange={(e) => setNewPassWord(e.target.value)}
                 />
                 <Button
+                    style={{
+                        backgroundColor:'green'
+                    }}
                     className=" float-right w-[100px] mt-3 smt:float-left"
                     onClick={() => hanldleSubmit(user?._id)}
                 >
