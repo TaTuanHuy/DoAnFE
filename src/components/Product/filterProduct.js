@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { AlignJustify, RefreshCcw, ArrowDownWideNarrow } from "lucide-react";
+import { AlignJustify, RefreshCcw } from "lucide-react";
 import { useState, useEffect } from "react";
 import { notFound, useSearchParams } from "next/navigation";
 import Pagination from "../page/Pagination";

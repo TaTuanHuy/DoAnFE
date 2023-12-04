@@ -1,10 +1,9 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Heading1 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import { getOrderByUserID, deleteOrder } from "../../../service/order"
+import { getOrderByUserID } from "../../../service/order"
 import HandleOrder from "@/components/handleOrder/DialogManagementOrder";
 
 function Order() {

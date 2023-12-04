@@ -6,7 +6,6 @@ function CancelOrder({ id }) {
     async function handleDelete() {
         toast.success("Xóa thành công!", { theme: "dark", position: "top-center" });
         const data = await deleteOrder(id)
-        console.log('data: ',data)
         if (data.message === "successfull") {
             window.location.reload();
         }

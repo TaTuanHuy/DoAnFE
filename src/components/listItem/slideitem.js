@@ -1,8 +1,7 @@
 "use client";
 import useSWR from "swr";
 import { Navigation, Pagination, A11y } from "swiper/modules";
-import { Swiper } from "swiper/react";
-import { SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -32,12 +31,6 @@ function SliderItem({ children, newItem, bestItem }) {
             revalidateOnReconnect: false,
         }
     );
-    // const [product, setProduct] = useState();
-    // useEffect(() => {
-    //     fetch("http://localhost:4000/product/")
-    //         .then((res) => res.json())
-    //         .then((res) => setProduct(res));
-    // }, []);
     if (isLoading) return <Loading />;
     return (
         <div className="mt-10 ">

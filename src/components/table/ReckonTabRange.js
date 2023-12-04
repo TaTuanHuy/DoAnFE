@@ -9,7 +9,6 @@ import 'react-datepicker/dist/react-datepicker.css'
 function ReckonTabRange() {
 
     const tableRef = useRef(null);
-    const [date, setDate] = useState(new Date());
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
@@ -18,13 +17,7 @@ function ReckonTabRange() {
         orderQuantity: 0,
         turnOver: 0
     })
-
-    const handleChange = (range) => {
-        const [startDate, endDate] = range;
-        setStartDate(startDate);
-        setEndDate(endDate);
-    };
-
+    
     useEffect(() => {
         async function getData() {
             const response = await reckonRange(startDate, endDate);
@@ -48,7 +41,7 @@ function ReckonTabRange() {
                         style={{
                             marginRight: '10px'
                         }}
-                        for="from-date"
+                        htmlFor="from-date"
                     >Từ ngày:
                     </label>
                     <DatePicker
@@ -64,7 +57,7 @@ function ReckonTabRange() {
                         style={{
                             marginRight: '10px'
                         }}
-                        for="to-date"
+                        htmlFor="to-date"
                     >
                         Đến ngày:
                     </label>
@@ -147,107 +140,104 @@ function ReckonTabRange() {
                     maxHeight: '650px'
                 }}
             >
-
-                <>
-                    <table
-                        ref={tableRef}
-                        className="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-auto "
-                    >
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th scope="col" className="px-6 py-3    text-center">
-                                    Name
-                                </th>
-                                <th scope="col" className="px-6 py-3   text-center ">
-                                    Phone
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-center">
-                                    Product
-                                </th>
-                                <th scope="col" className="px-6 py-3   text-center">
-                                    Total
-                                </th>
-                                <th scope="col" className="px-6 py-3  text-center">
-                                    City
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-center">
-                                    Addres
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-center">
-                                    isPaid
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-center">
-                                    isDelivered
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data.orders?.map((item, i) => {
-                                return (
-                                    <tr key={item._id}>
-                                        <th
-                                            scope="row"
-                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            {item.shippingAddress.fullName}
-                                        </th>
-                                        <th
-                                            scope="row"
-                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            {item.shippingAddress.phone}
-                                        </th>
-                                        <th
-                                            scope="row"
-                                            className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            {item.orderItems.map((order) => {
-                                                return (
-                                                    <>
-                                                        <span>
-                                                            {order.name} x {order.size} x {order.amount}
-                                                        </span>
-                                                        <br />
-                                                    </>
-                                                );
-                                            })}
-                                        </th>
-                                        <th
-                                            scope="row"
-                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            {item.totalPrice}
-                                        </th>
-                                        <th
-                                            scope="row"
-                                            className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            {item.shippingAddress.city}
-                                        </th>
-                                        <th
-                                            scope="row"
-                                            className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            {item.shippingAddress.address}
-                                        </th>
-                                        <th
-                                            scope="row"
-                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            {item.isPaid ? "đã Thanh toán" : "chưa thanh toán"}
-                                        </th>
-                                        <th
-                                            scope="row"
-                                            className="text-center  px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                                        >
-                                            {item.isDelivered ? "đã ship" : "chưa ship"}
-                                        </th>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </>
+                <table
+                    ref={tableRef}
+                    className="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-auto "
+                >
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" className="px-6 py-3    text-center">
+                                Name
+                            </th>
+                            <th scope="col" className="px-6 py-3   text-center ">
+                                Phone
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-center">
+                                Product
+                            </th>
+                            <th scope="col" className="px-6 py-3   text-center">
+                                Total
+                            </th>
+                            <th scope="col" className="px-6 py-3  text-center">
+                                City
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-center">
+                                Addres
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-center">
+                                isPaid
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-center">
+                                isDelivered
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.orders?.map((item, i) => {
+                            return (
+                                <tr key={item._id}>
+                                    <th
+                                        scope="row"
+                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.shippingAddress.fullName}
+                                    </th>
+                                    <th
+                                        scope="row"
+                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.shippingAddress.phone}
+                                    </th>
+                                    <th
+                                        scope="row"
+                                        className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.orderItems.map((order) => {
+                                            return (
+                                                <>
+                                                    <span>
+                                                        {order.name} x {order.size} x {order.amount}
+                                                    </span>
+                                                    <br />
+                                                </>
+                                            );
+                                        })}
+                                    </th>
+                                    <th
+                                        scope="row"
+                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.totalPrice}
+                                    </th>
+                                    <th
+                                        scope="row"
+                                        className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.shippingAddress.city}
+                                    </th>
+                                    <th
+                                        scope="row"
+                                        className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.shippingAddress.address}
+                                    </th>
+                                    <th
+                                        scope="row"
+                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.isPaid ? "đã Thanh toán" : "chưa thanh toán"}
+                                    </th>
+                                    <th
+                                        scope="row"
+                                        className="text-center  px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {item.isDelivered ? "đã ship" : "chưa ship"}
+                                    </th>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
             </div>
         </>
     );

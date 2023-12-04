@@ -7,7 +7,6 @@ function ChangeAdmin({ id, item }) {
         toast.success("Thay đổi thành công!", { theme: "dark", position: "top-center" });
         const token = localStorage.getItem('access_token')
         const data = await changeAmdin(token, id, item)
-        console.log("data: ", data.message === "succesfull")
         if (data.message === "succesfull") {
             window.location.reload();
         }

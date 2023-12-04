@@ -266,4 +266,9 @@ function Checkouts({ params }) {
     );
 }
 
+// CheckoutsPage.propTypes ={
+//     params: PropTypes.any.isRequired,
+// }
+
+
 export default Checkouts;

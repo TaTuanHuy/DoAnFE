@@ -1,23 +1,17 @@
 "use client";
 import Link from "next/link";
 
-import { useDispatch, useSelector } from "react-redux";
-import { UserSquare2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { editOrder } from "@/service/order";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { reset } from "@/redux/features/counter/orderSlice";
-import { useSearchParams } from "next/navigation";
 
-import { getOrderByID } from '@/service/order'
-import { current } from "@reduxjs/toolkit";
+import { getOrderByID } from '../../../../service/order';
 
 function EditOrder({ params }) {
     const [data, setData] = useState({})
-    const [edit, setEdit] = useState({});
     useEffect(() => {
         const getData = async () => {
             const token = localStorage.getItem('access_token')

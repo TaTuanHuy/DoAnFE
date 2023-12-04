@@ -29,7 +29,6 @@ function FormAdd() {
                     updateSizeCheck.push(sizeCheck[i]);
                 }
             }
-            // setSizeCheck(sizeCheck.filter((item) => item !== e.id));
             setSizeCheck(updateSizeCheck);
         }
     }

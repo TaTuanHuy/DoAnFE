@@ -1,10 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import {updatePassWord} from "../../service/user"
-import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 function ChangePassWord() {

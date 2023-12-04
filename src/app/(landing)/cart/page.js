@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Plus, Minus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { removeOrder, increasing, decrease } from "@/redux/features/counter/orderSlice";
-import { use, useMemo } from "react";
+import { useMemo } from "react";
 
 function Cart() {
     const dispatch = useDispatch();
@@ -111,7 +111,7 @@ function Cart() {
                             <td>Note</td>
                             <td colSpan={6} className="text-right">
                                 Tổng tiền :
-                                <span className="font-medium text-2xl"> {resultTotal} đ</span>
+                            <span className="font-medium text-2xl"> {resultTotal} đ</span>
                             </td>
                         </tr>
                     </tfoot>

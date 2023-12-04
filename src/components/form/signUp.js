@@ -3,12 +3,10 @@ import { Button } from "@/components/ui/button";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
     FormMessage,
-    required,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -65,17 +63,18 @@ function FormSignIn() {
     async function onSubmit(values) {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/users/signup`, {
             method: "POST",
-            redirect: router.push("/signin"),
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(values), // body data type must match "Content-Type" header
         });
-        const result = await response.json().then((data) => {
-            console.log(data);
-        }); // parses JSON response into native JavaScript objects
-
-        // console.log(values);
+        const result = await response.json()
+        if(result.status === 200){
+            alert('Đăng kí thành công')
+             router.push("/signin")
+        }else{
+            alert(result.message)
+        }
     }
 
     return (

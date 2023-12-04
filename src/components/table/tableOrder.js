@@ -1,24 +1,21 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
-import Pagination from "../page/Pagination";
 import { DownloadTableExcel } from "react-export-table-to-excel";
-import { getAllOrder, isDelivered, deleteOrder } from "@/service/order";
+import { getAllOrder } from "@/service/order";
 import HandleOrder from "../handleOrder/DialogManagementOrder"
 
 function TableOrder() {
     const tableRef = useRef(null);
     const [data, setData] = useState();
 
-    const [pageUi, setPageUi] = useState(1);
-
     const [dataRender, setDataRender] = useState([])
 
     useEffect(() => {
         async function getData() {
-            const datas = await getAllOrder();
-            setDataRender(datas)
-            return setData(datas);
+            const response = await getAllOrder();
+            setDataRender(response)
+            return setData(response);
         }
         getData();
     }, []);
@@ -28,7 +25,7 @@ function TableOrder() {
         if (condition === 'all') {
             return setDataRender(data)
         }
-        const result = data.filter((item) => {
+        const result = data?.filter((item) => {
             return item.isDelivered === condition
         })
         return setDataRender(result)
@@ -66,6 +63,7 @@ function TableOrder() {
                     onClick={() => showDelivered(false)}
                 >Chưa vận chuyển</Button>
             </div>
+
             <div className="relative overflow-x-auto shadow-md smt:rounded-lg"
                 style={{
                     maxHeight: '600px'
@@ -113,10 +111,11 @@ function TableOrder() {
                         {dataRender?.map((item, i) => {
                             return (
                                 <tr
-                                style={{
-                                    height: '100px'
-                                }}   
-                                key={item._id}>
+                                    key={item._id}
+                                    style={{
+                                        height: '100px'
+                                    }}   
+                                >
                                     <th
                                         scope="row"
                                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -133,14 +132,16 @@ function TableOrder() {
                                         scope="row"
                                         className="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                     >
-                                        {item.orderItems.map((order) => {
+                                        {item.orderItems.map((order, i) => {
                                             return (
-                                                <>
+                                                <div
+                                                    key={order._id + order.size}
+                                                >
                                                     <span>
                                                         {order.name} x {order.size} x {order.amount}
                                                     </span>
                                                     <br />
-                                                </>
+                                                </div>
                                             );
                                         })}
                                     </th>
@@ -208,13 +209,6 @@ function TableOrder() {
                         })}
                     </tbody>
                 </table>
-                {/* <Pagination
-                setPageUi={setPageUi}
-                pageUi={pageUi}
-                page={page}
-                totalPage={totalPage}
-                countProducts={countProducts}
-            /> */}
             </div>
         </>
     );

@@ -6,6 +6,7 @@ export const getAllProduct = async (pageUi) => {
 
 export const getBestSeller = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_APP_URL}/product/get-product/hot`);
+    return res
 };
 
 export const createProduct = async (valueForm) => {

@@ -58,7 +58,7 @@ function ReckonTabDay() {
                         style={{
                             marginRight: '10px'
                         }}
-                        for="first-date"
+                        htmlFor="first-date"
                     >Thống kê của ngày:
                     </label>
                     <DatePicker id='first-date' selected={firstDate} onChange={(date) => setFirstDate(date)} />
@@ -68,7 +68,7 @@ function ReckonTabDay() {
                         style={{
                             marginRight: '10px'
                         }}
-                        for="compare-date"
+                        htmlFor="compare-date"
                     >
                         So sánh với ngày:
                     </label>
@@ -238,7 +238,6 @@ function ReckonTabDay() {
                 }}
             >
 
-                <>
                     <table
                         ref={tableRef}
                         className="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-auto "
@@ -337,7 +336,6 @@ function ReckonTabDay() {
                             })}
                         </tbody>
                     </table>
-                </>
             </div>
         </>
     );
