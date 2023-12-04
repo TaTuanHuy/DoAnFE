@@ -36,7 +36,8 @@ function EditProfile() {
         if(response.status === 400){
             return alert(response.message)
         }else{
-            return alert(response.message)
+            alert(response.message)
+            return window.location.reload();
         }
     }
 
@@ -44,7 +45,7 @@ function EditProfile() {
         <>
             <h2 className="text-xl font-bold mb-3 w-screen">Cập nhật thông tin</h2>
 
-            <form className="flex flex-col">
+            <div className="flex flex-col">
                 <label htmlFor="name" className="font-bold">
                     Name
                 </label>
@@ -84,7 +85,7 @@ function EditProfile() {
                 >
                     Cập nhật
                 </Button>
-            </form>
+            </div>
         </>
     ) }
 
