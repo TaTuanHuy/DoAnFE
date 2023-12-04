@@ -34,7 +34,8 @@ function EditProfile() {
             phoneNumber: phone,
         }, id, token)
         if(response.status === 400){
-            return alert(response.message)
+            alert(response.message)
+            return window.location.reload();
         }else{
             alert(response.message)
             return window.location.reload();
