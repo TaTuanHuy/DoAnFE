@@ -54,8 +54,15 @@ function FormUpdate({ id, product }) {
         });
     }
     async function handleSubmit() {
-        const data = await updateProduct(id, valueForm);
-        if (data.message === "missing something ?") {
+
+        const data = {
+            ...valueForm,
+            image: [img1, img2, img3, img4],
+            size: sizeCheck,
+        }
+
+        const response = await updateProduct(id, data);
+        if (response.message === "missing something ?") {
             toast.error("missing something ?", { theme: "dark", position: "top-center" });
         } else {
             toast.success("Wow so easy!", { theme: "dark", position: "top-center" });
@@ -73,7 +80,9 @@ function FormUpdate({ id, product }) {
                         id="imgOne"
                         name="img"
                         value={img1.img}
-                        onChange={(e) => setImg1({ img: e.target.value })}
+                        onChange={(e) => {
+                            setImg1({ img: e.target.value })
+                        }}
                         className="border border-solid border-slate-950 rounded-sm w-[250px] px-2 py-1"
                     />
                     <label className=" font-bold text-base" htmlFor="imgTwo">
@@ -83,7 +92,9 @@ function FormUpdate({ id, product }) {
                         id="imgTwo"
                         name="img"
                         value={img2.img}
-                        onChange={(e) => setImg2({ img: e.target.value })}
+                        onChange={(e) => {
+                            setImg2({ img: e.target.value })
+                        }}
                         className="border border-solid border-slate-950 rounded-sm w-[250px] px-2 py-1"
                     />
                     <label className=" font-bold text-base" htmlFor="imgThree">
@@ -93,7 +104,9 @@ function FormUpdate({ id, product }) {
                         id="imgThree"
                         name="img"
                         value={img3.img}
-                        onChange={(e) => setImg3({ img: e.target.value })}
+                        onChange={(e) => {
+                            setImg3({ img: e.target.value })
+                        }}
                         className="border border-solid border-slate-950 rounded-sm w-[250px] px-2 py-1"
                     />
                     <label className=" font-bold text-base" htmlFor="imgFour">
