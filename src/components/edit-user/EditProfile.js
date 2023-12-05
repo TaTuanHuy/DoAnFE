@@ -37,7 +37,6 @@ function EditProfile() {
         if(email === user.email){
             delete data.email
         }
-        console.log(data)
         const response = await editUser(data, id, token)
         if(response.status === 400){
             alert(response.message)
