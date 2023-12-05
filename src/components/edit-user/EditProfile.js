@@ -19,20 +19,26 @@ function EditProfile() {
 
     async function hanldleSubmit(id) {
         const token = localStorage.getItem('access_token')
+        let checkPhone = phone.length === 10
         if(name === ''){
             return alert('Bạn đã nhập để trống phần tên! Vui lòng thử lại')
         }
         if(email === ''){
              return alert('Bạn đã nhập để trống phần email! Vui lòng thử lại')
         }
-        if(phone === '' || phone.length > 10){
+        if(phone === '' || !checkPhone){
              return alert('Bạn đã nhập sai số điện thoại! Vui lòng thử lại')
         }
-        const response = await editUser({
+        const data = {
             name: name,
             email: email,
             phoneNumber: phone,
-        }, id, token)
+        }
+        if(email === user.email){
+            delete data.email
+        }
+        console.log(data)
+        const response = await editUser(data, id, token)
         if(response.status === 400){
             alert(response.message)
             return window.location.reload();
